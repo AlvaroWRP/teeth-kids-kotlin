@@ -13,36 +13,39 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp"
-        android:text="@string/seja_bem_vindo"
+        android:text="@string/welcome"
         android:textColor="@color/black"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300dp"
-        android:text="@string/utilize_botoes_login_cadastro"
+        android:text="@string/how_to_log_in"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sign_in"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="550dp"
         android:background="@drawable/rounded_corner"
-        android:text="@string/btn_login"
+        android:text="@string/btn_sign_in"
         android:textColor="@color/white"
         android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sign_up"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="620dp"
         android:background="@drawable/rounded_corner"
-        android:text="@string/btn_cadastrar"
+        android:text="@string/btn_sign_up"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

@@ -2,15 +2,15 @@ package com.example.teethkids
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.teethkids.databinding.ActivityLoginScreenBinding
+import com.example.teethkids.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityLoginScreenBinding
+    lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginScreenBinding.inflate(layoutInflater)
+        binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

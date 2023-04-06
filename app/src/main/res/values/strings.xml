@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">TeethKids</string>
-    <string name="btn_login">Login</string>
-    <string name="btn_cadastrar">Cadastrar</string>
-    <string name="seja_bem_vindo">Seja bem-vindo(a)</string>
-    <string name="utilize_botoes_login_cadastro">Utilize os botões abaixo para entrar</string>
+    <string name="btn_sign_in">Entrar</string>
+    <string name="btn_sign_up">Cadastrar</string>
+    <string name="welcome">Boas-vindas!</string>
+    <string name="how_to_log_in">Utilize os botões abaixo para entrar</string>
+    <string name="hello_again">Olá novamente!</string>
+    <string name="type_your_email">Digite seu e-mail</string>
+    <string name="type_your_password">Digite sua senha</string>
 </resources>
