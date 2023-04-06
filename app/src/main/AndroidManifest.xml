@@ -12,7 +12,7 @@
         android:theme="@style/Theme.TeethKids"
         tools:targetApi="31">
         <activity
-            android:name=".log_in_activity"
+            android:name=".LogInActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
