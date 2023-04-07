@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/green_balls"
+    android:background="@drawable/pink_balls"
     android:padding="10dp">
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -20,89 +20,66 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="@string/hello_again"
+        android:layout_marginTop="80dp"
+        android:text="@string/create_your_account"
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:text="@string/additional_info"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_email"
+        android:id="@+id/input_bio"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="170dp"
         android:textColorHint="@color/black"
         app:boxCornerRadiusBottomEnd="30dp"
         app:boxCornerRadiusBottomStart="30dp"
         app:boxCornerRadiusTopEnd="30dp"
         app:boxCornerRadiusTopStart="30dp"
         app:boxStrokeColor="@color/black"
-        app:hintTextColor="@color/black">
+        app:hintTextColor="@color/black"
+        app:counterEnabled="true"
+        app:counterMaxLength="2000"
+        app:boxBackgroundColor="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_input_email"
+            android:id="@+id/edt_input_bio"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/type_your_email"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_password"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="370dp"
-        android:textColorHint="@color/black"
-        app:boxCornerRadiusBottomEnd="30dp"
-        app:boxCornerRadiusBottomStart="30dp"
-        app:boxCornerRadiusTopEnd="30dp"
-        app:boxCornerRadiusTopStart="30dp"
-        app:boxStrokeColor="@color/black"
-        app:hintTextColor="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_input_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/type_your_password"
+            android:hint="Digite aqui"
+            android:layout_height="360dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_continue"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="540dp"
+        android:layout_marginTop="580dp"
         android:background="@drawable/rounded_corner"
-        android:text="@string/btn_sign_in"
+        android:text="@string/next"
         android:textColor="@color/white"
         android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="610dp"
-        android:text="@string/forgot_password"
-        android:textColor="@color/black" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_create_new_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="640dp"
-        android:text="@string/create_new_account"
+        android:layout_marginTop="650dp"
+        android:text="@string/step_3_of_3"
         android:textColor="@color/black" />
 
 </RelativeLayout>

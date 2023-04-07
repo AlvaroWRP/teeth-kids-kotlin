@@ -25,7 +25,7 @@ class LogInActivity : AppCompatActivity() {
         }
 
         binding.tvCreateNewAccount.setOnClickListener {
-            val pass = Intent(this, CreateAccountOneActivity::class.java)
+            val pass = Intent(this, FirstCreateAccountScreen::class.java)
             startActivity(pass)
         }
     }

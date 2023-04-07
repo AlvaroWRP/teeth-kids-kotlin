@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnSignUp.setOnClickListener {
-            val pass = Intent(this, CreateAccountOneActivity::class.java)
+            val pass = Intent(this, FirstCreateAccountScreen::class.java)
             startActivity(pass)
         }
     }
