@@ -1,8 +1,8 @@
 package com.example.teethkids
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.teethkids.databinding.LogInActivityBinding
 
 class LogInActivity : AppCompatActivity() {
@@ -16,6 +16,16 @@ class LogInActivity : AppCompatActivity() {
 
         binding.btnGoBack.setOnClickListener {
             val pass = Intent(this, MainActivity::class.java)
+            startActivity(pass)
+        }
+
+        binding.tvForgotPassword.setOnClickListener {
+            val pass = Intent(this, ForgotPassword::class.java)
+            startActivity(pass)
+        }
+
+        binding.tvCreateNewAccount.setOnClickListener {
+            val pass = Intent(this, CreateAccountOneActivity::class.java)
             startActivity(pass)
         }
     }

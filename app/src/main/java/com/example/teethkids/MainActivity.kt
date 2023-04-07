@@ -18,5 +18,10 @@ class MainActivity : AppCompatActivity() {
             val pass = Intent(this, LogInActivity::class.java)
             startActivity(pass)
         }
+
+        binding.btnSignUp.setOnClickListener {
+            val pass = Intent(this, CreateAccountOneActivity::class.java)
+            startActivity(pass)
+        }
     }
 }
