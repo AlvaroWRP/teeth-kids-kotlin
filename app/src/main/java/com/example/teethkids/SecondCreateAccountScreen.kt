@@ -3,9 +3,7 @@ package com.example.teethkids
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.teethkids.databinding.FirstCreateAccountScreenActivityBinding
 import com.example.teethkids.databinding.SecondCreateAccountScreenActivityBinding
-import com.example.teethkids.databinding.ThirdCreateAccountScreenActivityBinding
 
 class SecondCreateAccountScreen : AppCompatActivity() {
 

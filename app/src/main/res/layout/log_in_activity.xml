@@ -10,7 +10,7 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_go_back"
-        android:contentDescription="a"
+        android:importantForAccessibility="no"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/grey"

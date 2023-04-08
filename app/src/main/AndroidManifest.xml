@@ -21,9 +21,6 @@
             android:name=".FirstCreateAccountScreen"
             android:exported="false" />
         <activity
-            android:name=".CreateAccountOne"
-            android:exported="false" />
-        <activity
             android:name=".ForgotPassword"
             android:exported="false" />
         <activity
@@ -39,5 +36,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

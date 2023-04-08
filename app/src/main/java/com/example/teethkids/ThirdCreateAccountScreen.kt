@@ -3,12 +3,11 @@ package com.example.teethkids
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.teethkids.databinding.FirstCreateAccountScreenActivityBinding
 import com.example.teethkids.databinding.ThirdCreateAccountScreenActivityBinding
 
 class ThirdCreateAccountScreen : AppCompatActivity() {
 
-    lateinit var binding:ThirdCreateAccountScreenActivityBinding
+    lateinit var binding: ThirdCreateAccountScreenActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
