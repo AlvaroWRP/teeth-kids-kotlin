@@ -21,5 +21,9 @@ class MainMenu : AppCompatActivity() {
             startActivity(pass)
         }
 
+        binding.btnProfile.setOnClickListener {
+            val pass = Intent(this, ProfileActivity::class.java)
+            startActivity(pass)
+        }
     }
 }

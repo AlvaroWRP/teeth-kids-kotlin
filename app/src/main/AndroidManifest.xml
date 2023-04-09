@@ -12,6 +12,15 @@
         android:theme="@style/Theme.TeethKids"
         tools:targetApi="31">
         <activity
+            android:name=".Reputation"
+            android:exported="false" />
+        <activity
+            android:name=".EmergencyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainMenu"
             android:exported="false" />
         <activity
