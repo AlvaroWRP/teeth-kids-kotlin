@@ -10,10 +10,10 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_go_back"
-        android:importantForAccessibility="no"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/grey"
+        android:importantForAccessibility="no"
         android:src="@drawable/ic_arrow_back" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -32,8 +32,7 @@
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="130dp"
-        android:src="@drawable/rounded_corner"
-        />
+        android:src="@drawable/rounded_corner" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_name"
@@ -50,8 +49,8 @@
         android:id="@+id/tv_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="400dp"
-        android:layout_marginLeft="30dp"
         android:text="@string/personal_data"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -61,8 +60,8 @@
         android:id="@+id/tv_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="440dp"
-        android:layout_marginLeft="30dp"
         android:text="@string/phone"
         android:textColor="@color/black"
         android:textSize="15sp" />
@@ -71,8 +70,8 @@
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="470dp"
-        android:layout_marginLeft="30dp"
         android:text="@string/email"
         android:textColor="@color/black"
         android:textSize="15sp" />
@@ -81,13 +80,10 @@
         android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="500dp"
-        android:layout_marginLeft="30dp"
         android:text="@string/placeholder_address"
         android:textColor="@color/black"
         android:textSize="15sp" />
-
-
-
 
 </RelativeLayout>

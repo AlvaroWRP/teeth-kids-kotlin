@@ -3,7 +3,6 @@ package com.example.teethkids
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.teethkids.databinding.MainMenuActivityBinding
 import com.example.teethkids.databinding.ProfileActivityBinding
 
 class ProfileActivity : AppCompatActivity() {

@@ -7,4 +7,6 @@
     android:background="@drawable/blue_squares"
     android:padding="10dp">
 
+
+
 </RelativeLayout>

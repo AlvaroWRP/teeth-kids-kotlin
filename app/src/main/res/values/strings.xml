@@ -37,7 +37,7 @@
     <string name="my_profile">Meu Perfil</string>
     <string name="personal_data">Dados Pessoais</string>
     <string name="name">Name</string>
-    <string name="phone">placholder_phone</string>
+    <string name="phone">placeholder_phone</string>
     <string name="email">placeholder_email</string>
     <string name="placeholder_address">placeholder_address</string>
 </resources>
