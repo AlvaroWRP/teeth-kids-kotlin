@@ -19,5 +19,10 @@ class ThirdCreateAccountScreen : AppCompatActivity() {
             val pass = Intent(this, SecondCreateAccountScreen::class.java)
             startActivity(pass)
         }
+
+        binding.btnContinue.setOnClickListener {
+            val pass = Intent(this, MainMenu::class.java)
+            startActivity(pass)
+        }
     }
 }

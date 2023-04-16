@@ -29,4 +29,15 @@
     <string name="first_address">Endereço 1</string>
     <string name="second_address">Endereço 2</string>
     <string name="third_address">Endereço 3</string>
+    <string name="professional_area">Área do Profissional</string>
+    <string name="profile">perfil</string>
+    <string name="emergencies">Emergencias</string>
+    <string name="status">meu status</string>
+    <string name="logout">sair</string>
+    <string name="my_profile">Meu Perfil</string>
+    <string name="personal_data">Dados Pessoais</string>
+    <string name="name">Name</string>
+    <string name="phone">placholder_phone</string>
+    <string name="email">placeholder_email</string>
+    <string name="placeholder_address">placeholder_address</string>
 </resources>
