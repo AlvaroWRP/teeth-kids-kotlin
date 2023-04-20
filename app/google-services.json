@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "599922435044",
+    "project_id": "teethkids-97abb",
+    "storage_bucket": "teethkids-97abb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599922435044:android:30e3f6f74483c72ea81df1",
+        "android_client_info": {
+          "package_name": "com.example.teethkids"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599922435044-rp1j9d1ju2ghlk98frjtsk9s0rb8l1ci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxl4nKA0hrVzk6UV4qQmIwZ95-k1uxX0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599922435044-rp1j9d1ju2ghlk98frjtsk9s0rb8l1ci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
