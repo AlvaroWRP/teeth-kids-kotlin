@@ -24,87 +24,62 @@
                 android:importantForAccessibility="no"
                 android:src="@drawable/ic_arrow_back" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/profile_img"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="220dp"
-                android:layout_centerHorizontal="true"
-                android:src="@mipmap/blank_pfp"
-                />
-
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="80dp"
                 android:text="@string/create_your_account"
                 android:textColor="@color/black"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="120dp"
+                android:text="@string/additional_info"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_name"
+                android:id="@+id/input_bio"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="400dp"
+                android:layout_marginTop="170dp"
                 android:textColorHint="@color/black"
+                app:boxBackgroundColor="@color/white"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
                 app:boxStrokeColor="@color/black"
+                app:counterEnabled="true"
+                app:counterMaxLength="2000"
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_input_name"
+                    android:id="@+id/edt_input_bio"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/type_your_name"
+                    android:layout_height="360dp"
+                    android:importantForAccessibility="no"
+                    android:maxLength="2000"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:inputType="text"/>
+                    android:textColorHint="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_phone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="470dp"
-                android:textColorHint="@color/black"
-                app:boxCornerRadiusBottomEnd="30dp"
-                app:boxCornerRadiusBottomStart="30dp"
-                app:boxCornerRadiusTopEnd="30dp"
-                app:boxCornerRadiusTopStart="30dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_input_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/type_your_phone"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:inputType="phone"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_continue"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="570dp"
+                android:layout_marginTop="580dp"
                 android:background="@drawable/rounded_corner"
-                android:text="@string/next"
+                android:text="@string/btn_sign_up"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -112,18 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
-                android:layout_marginTop="150dp"
-                android:text="@string/tv_signin_2"
-                android:textSize="17sp"
-                android:textColor="@color/black" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="650dp"
-                android:text="@string/step_1_of_3"
+                android:text="@string/step_3_of_3"
                 android:textColor="@color/black" />
 
         </RelativeLayout>

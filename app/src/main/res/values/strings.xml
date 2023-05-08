@@ -40,4 +40,7 @@
     <string name="phone">placeholder_phone</string>
     <string name="email">placeholder_email</string>
     <string name="placeholder_address">placeholder_address</string>
+    <string name="tv_signin_1">Para comecar, nos informe seu e-mail e crie uma senha</string>
+    <string name="tv_signin_2">Agora, vamos preencher seu perfil com outros dados importantes</string>
+    <string name="wait">Espere um momento...</string>
 </resources>

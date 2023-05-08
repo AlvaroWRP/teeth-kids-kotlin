@@ -14,15 +14,5 @@ class ThirdCreateAccountScreen : AppCompatActivity() {
         setContentView(R.layout.third_create_account_screen_activity)
         binding = ThirdCreateAccountScreenActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.btnGoBack.setOnClickListener {
-            val pass = Intent(this, SecondCreateAccountScreen::class.java)
-            startActivity(pass)
-        }
-
-        binding.btnContinue.setOnClickListener {
-            val pass = Intent(this, MainMenu::class.java)
-            startActivity(pass)
-        }
     }
 }

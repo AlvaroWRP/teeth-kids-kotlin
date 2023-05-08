@@ -47,7 +47,8 @@
             android:layout_height="match_parent"
             android:hint="@string/type_your_email"
             android:textColor="@color/black"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +65,8 @@
         app:boxCornerRadiusTopEnd="30dp"
         app:boxCornerRadiusTopStart="30dp"
         app:boxStrokeColor="@color/black"
-        app:hintTextColor="@color/black">
+        app:hintTextColor="@color/black"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_input_password"
@@ -72,7 +74,8 @@
             android:layout_height="match_parent"
             android:hint="@string/type_your_password"
             android:textColor="@color/black"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
