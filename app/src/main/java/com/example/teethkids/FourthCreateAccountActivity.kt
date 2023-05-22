@@ -22,7 +22,7 @@ class FourthCreateAccountActivity : AppCompatActivity() {
         }
 
         binding.btnContinue.setOnClickListener {
-            val pass = Intent(this, MainMenu::class.java)
+            val pass = Intent(this, EmergencyActivity::class.java)
             startActivity(pass)
         }
     }

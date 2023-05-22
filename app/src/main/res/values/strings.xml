@@ -32,7 +32,7 @@
     <string name="professional_area">Área do Profissional</string>
     <string name="profile">perfil</string>
     <string name="emergencies">Emergencias</string>
-    <string name="status">meu status</string>
+    <string name="status">Meu Status</string>
     <string name="logout">sair</string>
     <string name="my_profile">Meu Perfil</string>
     <string name="personal_data">Dados Pessoais</string>
@@ -43,4 +43,5 @@
     <string name="tv_signin_1">Para comecar, nos informe seu e-mail e crie uma senha</string>
     <string name="tv_signin_2">Agora, vamos preencher seu perfil com outros dados importantes</string>
     <string name="wait">Espere um momento...</string>
+    <string name="rating">Minha Reputação</string>
 </resources>
