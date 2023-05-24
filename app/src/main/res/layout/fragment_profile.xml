@@ -32,89 +32,65 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="100dp"
-                android:src="@drawable/baseline_account_box_24"/>
+                android:src="@drawable/baseline_account_box_24" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textAlignment="center"
                 android:layout_marginTop="200dp"
-                android:textColorHint="@color/black"
-                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="55dp"
+                android:text="@string/phone"
+                android:textColor="@color/black"
                 android:textAlignment="center"
-                app:boxCornerRadiusBottomEnd="30dp"
-                app:boxCornerRadiusBottomStart="30dp"
-                app:boxCornerRadiusTopEnd="30dp"
-                app:boxCornerRadiusTopStart="30dp"
-                >
+                android:layout_marginTop="275dp"
+                android:textSize="18dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_input_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/name"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textAlignment="center"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_phone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/tv_phone"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="270dp"
-                android:textColorHint="@color/black"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textAlignment="viewStart"
+                android:layout_marginTop="300dp"
+                android:textSize="20dp"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="55dp"
+                android:text="@string/my_bio"
+                android:textColor="@color/black"
                 android:textAlignment="center"
-                app:boxCornerRadiusBottomEnd="30dp"
-                app:boxCornerRadiusBottomStart="30dp"
-                app:boxCornerRadiusTopEnd="30dp"
-                app:boxCornerRadiusTopStart="30dp"
-                >
+                android:layout_marginTop="375dp"
+                android:textSize="18dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_input_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/phone"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textAlignment="center"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_bio"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/tv_bio"
                 android:layout_width="300dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="340dp"
-                android:textColorHint="@color/black"
+                android:layout_height="300dp"
                 android:layout_gravity="center_horizontal"
-                app:placeholderText="@string/bio"
-                app:boxCornerRadiusBottomEnd="30dp"
-                app:boxCornerRadiusBottomStart="30dp"
-                app:boxCornerRadiusTopEnd="30dp"
-                app:boxCornerRadiusTopStart="30dp"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_input_bio"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/bio"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:textColor="@color/black"
+                android:textAlignment="viewStart"
+                android:layout_marginTop="400dp"
+                tools:ignore="RtlCompat" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_continue"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="590dp"
+                android:layout_marginTop="750dp"
                 android:background="@drawable/rounded_corner"
                 android:text="@string/update"
                 android:textColor="@color/white"

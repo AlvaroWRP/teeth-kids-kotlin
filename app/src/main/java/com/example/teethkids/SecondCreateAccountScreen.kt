@@ -47,9 +47,8 @@ class SecondCreateAccountScreen : AppCompatActivity() {
         val number3 = binding.edtInputNumber3.text.toString()
         val comp3 = binding.edtInputComp3.text.toString()
 
-        if (street.isNotEmpty() && number.isNotEmpty() && comp.isNotEmpty()) {
+        if (street.isNotEmpty() && number.isNotEmpty()) {
 
-            // Save address to Firestore
             val firstAddress = hashMapOf(
                 "address1" to "$street, $number, $comp",
             )
@@ -65,14 +64,7 @@ class SecondCreateAccountScreen : AppCompatActivity() {
 
             firestore.collection("users")
                 .document(userId)
-                .update(
-                    "address1",
-                    firstAddress,
-                    "address2",
-                    secondAddress,
-                    "address3",
-                    thirdAddress
-                )
+                .update("address1", firstAddress, "address2", secondAddress, "address3", thirdAddress)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Endereco cadastrado com sucesso!", Toast.LENGTH_SHORT)
                         .show()

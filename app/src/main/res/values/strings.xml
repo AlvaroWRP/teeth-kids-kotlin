@@ -36,8 +36,8 @@
     <string name="logout">sair</string>
     <string name="my_profile">Meu Perfil</string>
     <string name="personal_data">Dados Pessoais</string>
-    <string name="name">Name</string>
-    <string name="phone">placeholder_phone</string>
+    <string name="name">Edite seu nome aqui</string>
+    <string name="phone">Meu celular:</string>
     <string name="email">placeholder_email</string>
     <string name="placeholder_address">placeholder_address</string>
     <string name="tv_signin_1">Para comecar, nos informe seu e-mail e crie uma senha</string>
@@ -51,4 +51,5 @@
     <string name="update">Atualizar Perfil</string>
     <string name="delete">Apagar Perfil</string>
     <string name="available">Estou Disponivel</string>
+    <string name="my_bio">Sobre Mim:</string>
 </resources>
