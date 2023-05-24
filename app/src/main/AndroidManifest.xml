@@ -12,7 +12,7 @@
         android:theme="@style/Theme.TeethKids"
         tools:targetApi="31">
         <activity
-            android:name=".FourthCreateAccountActivity"
+            android:name=".ThirdCreateAccountActivity"
             android:exported="false" />
         <activity
             android:name=".Reputation"
@@ -27,7 +27,7 @@
             android:name=".MainMenu"
             android:exported="false" />
         <activity
-            android:name=".ThirdCreateAccountScreen"
+            android:name=".SecondCreateAccountScreen"
             android:exported="false" />
         <activity
             android:name=".SecondCreateAccountScreen"

@@ -1,30 +1,19 @@
 package com.example.teethkids
 
-import android.app.Dialog
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
 import android.widget.Toast
 import com.example.teethkids.databinding.SecondCreateAccountScreenActivityBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SecondCreateAccountScreen : AppCompatActivity() {
 
-    private lateinit var binding: SecondCreateAccountScreenActivityBinding
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var databaseReference: DatabaseReference
-    private lateinit var storageReference: StorageReference
-    private lateinit var imageUri: Uri
-    private lateinit var dialog: Dialog
-
+    lateinit var binding: SecondCreateAccountScreenActivityBinding
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
+    private lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,82 +21,70 @@ class SecondCreateAccountScreen : AppCompatActivity() {
         binding = SecondCreateAccountScreenActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        userId = intent.getStringExtra("userId").toString()
+
+        binding.btnContinue.setOnClickListener {
+            saveAddress()
+        }
+
         binding.btnGoBack.setOnClickListener {
             val pass = Intent(this, FirstCreateAccountScreen::class.java)
             startActivity(pass)
         }
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val uid = firebaseAuth.currentUser?.uid
+    }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users")
+    private fun saveAddress() {
+        val street = binding.edtInputStreet.text.toString()
+        val number = binding.edtInputNumber.text.toString()
+        val comp = binding.edtInputComp.text.toString()
+        val street2 = binding.edtInputStreet2.text.toString()
+        val number2 = binding.edtInputNumber2.text.toString()
+        val comp2 = binding.edtInputComp2.text.toString()
+        val street3 = binding.edtInputStreet3.text.toString()
+        val number3 = binding.edtInputNumber3.text.toString()
+        val comp3 = binding.edtInputComp3.text.toString()
 
-        binding.btnContinue.setOnClickListener {
+        if (street.isNotEmpty() && number.isNotEmpty() && comp.isNotEmpty()) {
 
-            showProgressBar()
-            val name = binding.edtInputName.text.toString()
-            val phone = binding.edtInputPhone.text.toString()
+            // Save address to Firestore
+            val firstAddress = hashMapOf(
+                "address1" to "$street, $number, $comp",
+            )
 
-            val user = User(name, phone)
-            if (uid !=null){
+            val secondAddress = hashMapOf(
+                "address2" to "$street2, $number2, $comp2",
+            )
 
-                databaseReference.child(uid).setValue(user).addOnCompleteListener {
+            val thirdAddress = hashMapOf(
+                "address2" to "$street3, $number3, $comp3",
+            )
 
-                    if (it.isSuccessful){
 
-                        uploadProfilePic()
-                        val intent = Intent(this, ThirdCreateAccountScreen::class.java)
-                        startActivity(intent)
-
-                    }else{
-
-                        hideProgressBar()
-                        Toast.makeText(this, "Falha ao atualizar a foto de perfil", Toast.LENGTH_SHORT).show()
-
-                    }
-
+            firestore.collection("users")
+                .document(userId)
+                .update(
+                    "address1",
+                    firstAddress,
+                    "address2",
+                    secondAddress,
+                    "address3",
+                    thirdAddress
+                )
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Endereco cadastrado com sucesso!", Toast.LENGTH_SHORT)
+                        .show()
+                    val intent = Intent(this, ThirdCreateAccountActivity::class.java)
+                    startActivity(intent)
                 }
-
-            }else{
-
-                Toast.makeText(this@SecondCreateAccountScreen, "Falha no cadastro, tente novamente", Toast.LENGTH_SHORT).show()
-
-            }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(this, "Falha ao Cadastrar Endereco", Toast.LENGTH_SHORT).show()
+                }
+        }else{
+            Toast.makeText(this, "Ao menos um endereco e necessario para o cadastro", Toast.LENGTH_SHORT).show()
         }
-
     }
 
-    private fun uploadProfilePic() {
-
-        imageUri = Uri.parse("android.resource://$packageName/${R.drawable.blank_pfp}")
-        storageReference = FirebaseStorage.getInstance().getReference("Users/"+firebaseAuth.currentUser?.uid)
-        storageReference.putFile(imageUri).addOnSuccessListener {
-
-            hideProgressBar()
-            Toast.makeText(this, "Perfil atualizado!", Toast.LENGTH_SHORT).show()
-
-        }.addOnFailureListener{
-
-            hideProgressBar()
-            Toast.makeText(this, "Falha ao atualizar o perfil", Toast.LENGTH_SHORT).show()
-
-        }
-
-    }
-
-    private fun showProgressBar(){
-
-        dialog = Dialog(this@SecondCreateAccountScreen)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_wait)
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.show()
-
-    }
-
-    private fun hideProgressBar(){
-
-        dialog.dismiss()
-
-    }
 }

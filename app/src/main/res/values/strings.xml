@@ -44,4 +44,11 @@
     <string name="tv_signin_2">Agora, vamos preencher seu perfil com outros dados importantes</string>
     <string name="wait">Espere um momento...</string>
     <string name="rating">Minha Reputação</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="config">Configurações</string>
+    <string name="bio">Biografia</string>
+    <string name="update">Atualizar Perfil</string>
+    <string name="delete">Apagar Perfil</string>
+    <string name="available">Estou Disponivel</string>
 </resources>

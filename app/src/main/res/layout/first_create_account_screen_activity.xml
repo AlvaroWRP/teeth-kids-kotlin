@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@drawable/pink_balls"
-android:padding="10dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pink_balls"
+    android:padding="10dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,13 +34,23 @@ android:padding="10dp">
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:layout_marginTop="150dp"
+                android:text="@string/tv_signin_1"
+                android:textSize="17sp"
+                android:textColor="@color/black" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="220dp"
+                android:layout_marginTop="200dp"
                 android:textColorHint="@color/black"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
@@ -55,8 +65,57 @@ android:padding="10dp">
                     android:layout_height="match_parent"
                     android:hint="@string/type_your_email"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:inputType="text"/>
+                    android:textColorHint="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="270dp"
+                android:textColorHint="@color/black"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/type_your_name"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_phone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="340dp"
+                android:textColorHint="@color/black"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_input_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/type_your_phone"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,15 +125,14 @@ android:padding="10dp">
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="290dp"
+                android:layout_marginTop="410dp"
                 android:textColorHint="@color/black"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
                 app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/black"
-                app:passwordToggleEnabled="true">
+                app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_input_password"
@@ -82,8 +140,7 @@ android:padding="10dp">
                     android:layout_height="match_parent"
                     android:hint="@string/type_your_new_password"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:inputType="text"/>
+                    android:textColorHint="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,15 +150,14 @@ android:padding="10dp">
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="360dp"
+                android:layout_marginTop="480dp"
                 android:textColorHint="@color/black"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
                 app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/black"
-                app:passwordToggleEnabled="true">
+                app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_confirm_password"
@@ -109,8 +165,7 @@ android:padding="10dp">
                     android:layout_height="match_parent"
                     android:hint="@string/confirm_password"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:inputType="text"/>
+                    android:textColorHint="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,7 +174,7 @@ android:padding="10dp">
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="480dp"
+                android:layout_marginTop="580dp"
                 android:background="@drawable/rounded_corner"
                 android:text="@string/next"
                 android:textColor="@color/white"
@@ -129,17 +184,7 @@ android:padding="10dp">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center"
-                android:layout_marginTop="150dp"
-                android:text="@string/tv_signin_1"
-                android:textSize="17sp"
-                android:textColor="@color/black" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="550dp"
+                android:layout_marginTop="650dp"
                 android:text="@string/step_1_of_3"
                 android:textColor="@color/black" />
 

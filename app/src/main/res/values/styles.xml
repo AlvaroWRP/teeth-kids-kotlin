@@ -3,4 +3,8 @@
     <style name="ImageView.Circle" parent="">
         <item name="cornerSize">50%</item>
     </style>
+    <style name="SwitchCompatStyle" >
+        <item name="thumbTint">@color/white</item>
+        <item name="trackTint">@drawable/switch_color</item>
+    </style>
 </resources>
