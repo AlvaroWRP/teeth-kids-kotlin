@@ -65,7 +65,8 @@
                     android:layout_height="match_parent"
                     android:hint="@string/type_your_email"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +91,8 @@
                     android:layout_height="match_parent"
                     android:hint="@string/type_your_name"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,7 +117,8 @@
                     android:layout_height="match_parent"
                     android:hint="@string/type_your_phone"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:inputType="phone"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,7 +135,8 @@
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
                 app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/black">
+                app:hintTextColor="@color/black"
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_input_password"
@@ -140,7 +144,8 @@
                     android:layout_height="match_parent"
                     android:hint="@string/type_your_new_password"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:inputType="textPassword"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,7 +162,8 @@
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
                 app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/black">
+                app:hintTextColor="@color/black"
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edt_confirm_password"
@@ -165,7 +171,8 @@
                     android:layout_height="match_parent"
                     android:hint="@string/confirm_password"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:inputType="textPassword"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

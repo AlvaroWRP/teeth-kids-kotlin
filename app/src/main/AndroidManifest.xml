@@ -9,25 +9,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="true"
         android:theme="@style/Theme.TeethKids"
         tools:targetApi="31">
         <activity
             android:name=".ThirdCreateAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".Reputation"
-            android:exported="false" />
-        <activity
             android:name=".EmergencyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainMenu"
-            android:exported="false" />
-        <activity
-            android:name=".SecondCreateAccountScreen"
             android:exported="false" />
         <activity
             android:name=".SecondCreateAccountScreen"
