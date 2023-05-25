@@ -9,13 +9,11 @@ import com.example.teethkids.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class Profile : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private val firestore = FirebaseFirestore.getInstance()
+    private var firestore = FirebaseFirestore.getInstance()
     private val uid = FirebaseAuth.getInstance().currentUser?.uid
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,5 +38,6 @@ class Profile : Fragment() {
             binding.tvPhone.text = phone
             binding.tvBio.text = biography
         }
+
     }
 }
