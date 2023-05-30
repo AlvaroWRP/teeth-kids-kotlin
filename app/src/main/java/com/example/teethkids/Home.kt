@@ -1,10 +1,12 @@
+package com.example.teethkids
+
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.teethkids.EmergencyRequest
 import com.example.teethkids.databinding.FragmentHomeBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -32,7 +34,7 @@ class Home : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = EmergencyRequestsAdapter { emergencyRequest, _ ->
+        adapter = EmergencyRequestsAdapter { _, _ ->
             // Handle accept or decline action
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -46,10 +48,15 @@ class Home : Fragment() {
                 val emergencyRequests = mutableListOf<EmergencyRequest>()
                 for (document in querySnapshot) {
                     val id = document.id
-                    val imageUrl = document.getString("imageUrl")
                     val title = document.getString("title")
                     val description = document.getString("description")
-                    val emergencyRequest = EmergencyRequest(id, imageUrl, title, description)
+                    val city = document.getString("city")
+                    val imageUrl1 = document.getString("imageUrl1")
+                    val imageUrl2 = document.getString("imageUrl2")
+                    val imageUrl3 = document.getString("imageUrl3")
+                    val street = document.getString("street")
+                    val streetNumber = document.getString("streetNumber")
+                    val emergencyRequest = EmergencyRequest(id, title, description, city, imageUrl1, imageUrl2, imageUrl3, street, streetNumber)
                     emergencyRequests.add(emergencyRequest)
                 }
                 adapter.setData(emergencyRequests)

@@ -53,4 +53,5 @@
     <string name="available">Estou Disponivel</string>
     <string name="my_bio">Sobre Mim:</string>
     <string name="take_picture">Tirar Foto</string>
+    <string name="close">Fechar</string>
 </resources>
