@@ -23,23 +23,27 @@ class EmergencyRequestsAdapter(
 
     private val emergencyRequests: MutableList<EmergencyRequest> = mutableListOf()
 
+    //Responsavel por atualizar o data set do adapter com uma nova lista de objetos do "EmergencyRequest"
     fun setData(data: List<EmergencyRequest>) {
         emergencyRequests.clear()
         emergencyRequests.addAll(data)
         notifyDataSetChanged()
     }
 
+    //Eh chamada pelo RecyclerView pra criar um novo ViewHolder para os itens da lista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemEmergencyRequestBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
 
+    //Esse metodo basicamente atualiza os conteudos do RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val emergencyRequest = emergencyRequests[position]
         holder.bind(emergencyRequest)
     }
 
+    //Retorna o numero total de itens dentro do data set
     override fun getItemCount(): Int {
         return emergencyRequests.size
     }
@@ -47,10 +51,12 @@ class EmergencyRequestsAdapter(
     inner class ViewHolder(private val binding: ItemEmergencyRequestBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        //Funcao de viewBinding
         fun bind(emergencyRequest: EmergencyRequest) {
             binding.titleTextView.text = emergencyRequest.title
             binding.descriptionTextView.text = emergencyRequest.description
 
+            //Botao de aceitar o chamado
             binding.acceptButton.setOnClickListener {
                 getCurrentMedicId { medicId ->
                     if (medicId != null) {
@@ -60,6 +66,7 @@ class EmergencyRequestsAdapter(
                                     it1
                                 )
                             }
+                        //Checa se o numero maximo de medicos ja aceitou o chamado e abre o mesmo
                         requestRef?.get()?.addOnSuccessListener { documentSnapshot ->
                             val medics = documentSnapshot.get("medics") as? List<*>
                             if ((medics != null) && (medics.size < 5) && !medics.contains(medicId)) {
@@ -70,35 +77,38 @@ class EmergencyRequestsAdapter(
                                         // Error storing medic ID
                                     }
                             } else {
-                                // Maximum medics reached or medic already accepted the request
+                                // Maximo de medicos estourado ou nao foi possivel abrir o chamado
                             }
                         }?.addOnFailureListener {
-                            // Error fetching request document
+                            // Erro ao buscar o documento
                         }
                     } else {
-                        // Handle the case when the medic ID is not available
+                        // ID do medico nao disponivel
                     }
-                } // Fetch the actual medic ID here
+                }
             }
 
+            //Botao de recusar o chamado
             binding.declineButton.setOnClickListener {
                 onActionClickListener(emergencyRequest, false)
             }
         }
 
+        //Funcao que pega o ID do medico atual
         private fun getCurrentMedicId(callback: (String?) -> Unit) {
             val firebaseAuth = FirebaseAuth.getInstance()
             val currentUser = firebaseAuth.currentUser
 
+            //Checa se o ID do usuario e nulo
             if (currentUser != null) {
                 val currentUserId = currentUser.uid
                 val usersCollection = FirebaseFirestore.getInstance().collection("users")
                 val userDocument = usersCollection.document(currentUserId)
 
+                //Pega o ID do medico logado (Document ID)
                 userDocument.get()
                     .addOnSuccessListener { documentSnapshot ->
                         if (documentSnapshot.exists()) {
-                            // Assuming the medic ID is stored as the document ID
                             callback.invoke(documentSnapshot.id)
                         } else {
                             // User document doesn't exist, handle accordingly
@@ -106,20 +116,21 @@ class EmergencyRequestsAdapter(
                         }
                     }
                     .addOnFailureListener {
-                        // Error fetching user document, handle accordingly
+                        // Erro ao Buscar o ID do medico
                         callback.invoke(null)
                     }
             } else {
+                //Caso seja nulo:
                 callback.invoke(null)
             }
         }
 
-
+        //Funcao que cuida do pop-up
         private fun showPopup(emergencyRequest: EmergencyRequest) {
             val dialog = Dialog(itemView.context)
             dialog.setContentView(R.layout.emergency_popup_dialog_fragment)
 
-            // Initialize views
+            // Inicializa as views
             val imageView1 = dialog.findViewById<ImageView>(R.id.imageView1)
             val imageView2 = dialog.findViewById<ImageView>(R.id.imageView2)
             val imageView3 = dialog.findViewById<ImageView>(R.id.imageView3)
@@ -127,7 +138,7 @@ class EmergencyRequestsAdapter(
             val addressTextView = dialog.findViewById<TextView>(R.id.addressTextView)
             val closeButton = dialog.findViewById<Button>(R.id.closeButton)
 
-            // Set data
+            // Coloca a imagem do banco nas views
             Glide.with(itemView.context).load(emergencyRequest.imageUrl1).into(imageView1)
             Glide.with(itemView.context).load(emergencyRequest.imageUrl2).into(imageView2)
             Glide.with(itemView.context).load(emergencyRequest.imageUrl3).into(imageView3)
@@ -135,12 +146,11 @@ class EmergencyRequestsAdapter(
             val address = "${emergencyRequest.street}, ${emergencyRequest.streetNumber}, ${emergencyRequest.city}"
             addressTextView.text = address
 
-            // Close button click listener
+            // Click Listener do botao para fechar o pop-up
             closeButton.setOnClickListener {
                 dialog.dismiss()
             }
 
-            // Show the dialog
             dialog.show()
         }
 

@@ -27,20 +27,23 @@ class Home : Fragment() {
         return binding.root
     }
 
+    //Essa funcao eh chamada quando o Fragment eh criado e a UI esta sendo inicializada
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         fetchEmergencyRequests()
     }
 
+    //Configura o RecyclerView
     private fun setupRecyclerView() {
         adapter = EmergencyRequestsAdapter { _, _ ->
-            // Handle accept or decline action
+            //Erro ao setar o RecyclerView
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
     }
 
+    //Pega os chamados de emergencia do BD da colecao "emergency_requests"
     private fun fetchEmergencyRequests() {
         db.collection("emergency_requests")
             .get()
@@ -62,7 +65,7 @@ class Home : Fragment() {
                 adapter.setData(emergencyRequests)
             }
             .addOnFailureListener { exception ->
-                // Handle error
+                // Erro ao pegar os dados do BD
             }
     }
 }

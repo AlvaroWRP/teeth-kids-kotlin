@@ -1,5 +1,6 @@
 package com.example.teethkids
 
+//Classe que cuida dos dados entre o BD e o app
 data class EmergencyRequest(
     val id: String?,
     val title: String?,

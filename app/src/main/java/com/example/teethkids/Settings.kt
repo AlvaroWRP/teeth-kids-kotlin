@@ -18,8 +18,7 @@ class Settings : Fragment() {
     private var firestore = FirebaseFirestore.getInstance()
     private lateinit var userId: String
 
-    // ...
-
+    //Essa funcao eh chamada quando o Fragment eh criado e a UI esta sendo inicializada
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +43,7 @@ class Settings : Fragment() {
         return view
     }
 
+    //Basicamente pega o ID do usuario que esta logado no momento (serve pra atualizar o BD caso haja qualquer alteracao no documento dele)
     private fun getIsActiveFromFirestore() {
         firestore.collection("users")
             .document(userId)
@@ -57,6 +57,7 @@ class Settings : Fragment() {
             }
     }
 
+    //Atualiza o boolean "isActive" no BD de acordo com a posicao da "switch"
     private fun updateIsActiveInFirestore(isActive: Boolean) {
         firestore.collection("users")
             .document(userId)
@@ -70,13 +71,14 @@ class Settings : Fragment() {
     }
 
 
-
+    //Funcao responsavel pelo logout
     private fun signOut() {
         FirebaseAuth.getInstance().signOut()
         val intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
     }
 
+    //Eh chamada quando a view e seus recursos sao destruidos
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -21,6 +21,7 @@ class EmergencyPopupDialogFragment : DialogFragment() {
     private var _binding: EmergencyPopupDialogFragmentBinding? = null
     private val binding get() = _binding!!
 
+    //Essa funcao eh chamada quando o Fragment eh criado e a UI esta sendo inicializada
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = EmergencyPopupDialogFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -29,7 +30,7 @@ class EmergencyPopupDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Retrieve the passed data
+        // Pega os dados passados
         val imageUrl1 = arguments?.getString("imageUrl1")
         val imageUrl2 = arguments?.getString("imageUrl2")
         val imageUrl3 = arguments?.getString("imageUrl3")
@@ -38,7 +39,7 @@ class EmergencyPopupDialogFragment : DialogFragment() {
         val streetNumber = arguments?.getString("streetNumber")
         val city = arguments?.getString("city")
 
-        // Display the data in the dialog views
+        //  Mostra os dados nas views
         loadImage(imageUrl1, binding.imageView1)
         loadImage(imageUrl2, binding.imageView2)
         loadImage(imageUrl3, binding.imageView3)
@@ -56,7 +57,7 @@ class EmergencyPopupDialogFragment : DialogFragment() {
         val inflater = requireActivity().layoutInflater
         val dialogView = inflater.inflate(R.layout.emergency_popup_dialog_fragment, null)
 
-        // Retrieve the passed data
+        // Pega os dados passados
         val imageUrl1 = arguments?.getString("imageUrl1")
         val imageUrl2 = arguments?.getString("imageUrl2")
         val imageUrl3 = arguments?.getString("imageUrl3")
@@ -65,29 +66,28 @@ class EmergencyPopupDialogFragment : DialogFragment() {
         val streetNumber = arguments?.getString("streetNumber")
         val city = arguments?.getString("city")
 
-        // Display the data in the dialog views
+        // Mostra os dados nas views
         val imageView1 = dialogView.findViewById<ImageView>(R.id.imageView1)
         val imageView2 = dialogView.findViewById<ImageView>(R.id.imageView2)
         val imageView3 = dialogView.findViewById<ImageView>(R.id.imageView3)
         val descriptionTextView = dialogView.findViewById<TextView>(R.id.descriptionTextView)
         val addressTextView = dialogView.findViewById<TextView>(R.id.addressTextView)
 
-        // Load the images using an image loading library like Glide or Picasso
-        // Example with Glide:
+        // Carrega as imagens do BD usando o Glide
         Glide.with(requireContext()).load(imageUrl1).into(imageView1)
         Glide.with(requireContext()).load(imageUrl2).into(imageView2)
         Glide.with(requireContext()).load(imageUrl3).into(imageView3)
 
         descriptionTextView.text = description
 
-        // Format and display the address
+        // Formata e mostra o endereco
         val formattedAddress = "$street $streetNumber, $city"
         addressTextView.text = formattedAddress
 
         return builder.create()
     }
 
-
+    //Funcao responsavel por carregar a imagem, e enquanto ela nao esta pronta mostra um placeholder
     private fun loadImage(imageUrl: String?, imageView: ImageView) {
         Glide.with(requireContext())
             .load(imageUrl)

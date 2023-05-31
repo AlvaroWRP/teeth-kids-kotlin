@@ -53,6 +53,7 @@ class Profile : Fragment() {
 
     }
 
+    //Pega o ID do usuario atual
     private fun getCurrentUserID() {
         val currentUserDocumentRef = firestore.collection("users").document("current_user")
 
@@ -61,13 +62,11 @@ class Profile : Fragment() {
                 if (documentSnapshot.exists()) {
                     currentUserID = documentSnapshot.getString("userID") ?: ""
                 } else {
-                    // User document doesn't exist
-                    // Handle the case accordingly
+                    // Documento nao existe
                 }
             }
             .addOnFailureListener {
-                // Failed to fetch user document
-                // Handle the error accordingly
+                // Falha ao pegar o ID do usuario
             }
 
         val userDocument = firestore.collection("users").document(uid!!)
@@ -76,7 +75,7 @@ class Profile : Fragment() {
             val phone = document.getString("phone")
             val biography = document.getString("biography")
 
-            // Update the user's info in the UI
+            // Atualiza os dados do usuario na UI
             binding.tvName.text = name
             binding.tvPhone.text = phone
             binding.tvBio.text = biography
