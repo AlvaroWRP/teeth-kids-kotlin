@@ -1,114 +1,104 @@
 package com.example.teethkids
 
-
-import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.teethkids.databinding.EmergencyPopupDialogFragmentBinding
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 
 
 class EmergencyPopupDialogFragment : DialogFragment() {
+    private lateinit var binding: EmergencyPopupDialogFragmentBinding
+    private val db: FirebaseFirestore = Firebase.firestore
 
-    private var _binding: EmergencyPopupDialogFragmentBinding? = null
-    private val binding get() = _binding!!
-
-    //Essa funcao eh chamada quando o Fragment eh criado e a UI esta sendo inicializada
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = EmergencyPopupDialogFragmentBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = EmergencyPopupDialogFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Pega os dados passados
-        val imageUrl1 = arguments?.getString("imageUrl1")
-        val imageUrl2 = arguments?.getString("imageUrl2")
-        val imageUrl3 = arguments?.getString("imageUrl3")
-        val description = arguments?.getString("description")
-        val street = arguments?.getString("street")
-        val streetNumber = arguments?.getString("streetNumber")
-        val city = arguments?.getString("city")
+        val binding = EmergencyPopupDialogFragmentBinding.bind(view)
 
-        //  Mostra os dados nas views
-        loadImage(imageUrl1, binding.imageView1)
-        loadImage(imageUrl2, binding.imageView2)
-        loadImage(imageUrl3, binding.imageView3)
-        binding.descriptionTextView.text = description
-        val formattedAddress = "$street $streetNumber, $city"
-        binding.addressTextView.text = formattedAddress
+        val emergencyRequest: EmergencyRequest? = arguments?.getParcelable("emergencyRequest")
 
-        binding.closeButton.setOnClickListener {
-            dismiss()
+        emergencyRequest?.let { request ->
+            loadImage(request.imageUrl1, binding.imageView1)
+            loadImage(request.imageUrl2, binding.imageView2)
+            loadImage(request.imageUrl3, binding.imageView3)
+
+            binding.descriptionTextView.text = request.description
+
+            val address = buildAddressString(request.street, request.streetNumber, request.city)
+            binding.addressTextView.text = address
+
+            binding.openMapsButton.setOnClickListener {
+                openGoogleMaps(request.street, request.streetNumber, request.city)
+            }
+
+            binding.endEmergencyButton.setOnClickListener {
+                deleteEmergencyRequest(request)
+            }
         }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(requireActivity())
-        val inflater = requireActivity().layoutInflater
-        val dialogView = inflater.inflate(R.layout.emergency_popup_dialog_fragment, null)
-
-        // Pega os dados passados
-        val imageUrl1 = arguments?.getString("imageUrl1")
-        val imageUrl2 = arguments?.getString("imageUrl2")
-        val imageUrl3 = arguments?.getString("imageUrl3")
-        val description = arguments?.getString("description")
-        val street = arguments?.getString("street")
-        val streetNumber = arguments?.getString("streetNumber")
-        val city = arguments?.getString("city")
-
-        // Mostra os dados nas views
-        val imageView1 = dialogView.findViewById<ImageView>(R.id.imageView1)
-        val imageView2 = dialogView.findViewById<ImageView>(R.id.imageView2)
-        val imageView3 = dialogView.findViewById<ImageView>(R.id.imageView3)
-        val descriptionTextView = dialogView.findViewById<TextView>(R.id.descriptionTextView)
-        val addressTextView = dialogView.findViewById<TextView>(R.id.addressTextView)
-
-        // Carrega as imagens do BD usando o Glide
-        Glide.with(requireContext()).load(imageUrl1).into(imageView1)
-        Glide.with(requireContext()).load(imageUrl2).into(imageView2)
-        Glide.with(requireContext()).load(imageUrl3).into(imageView3)
-
-        descriptionTextView.text = description
-
-        // Formata e mostra o endereco
-        val formattedAddress = "$street $streetNumber, $city"
-        addressTextView.text = formattedAddress
-
-        return builder.create()
+    private fun deleteEmergencyRequest(emergencyRequest: EmergencyRequest?) {
+        if (emergencyRequest != null) {
+            db.collection("emergency_requests")
+                .document(emergencyRequest.id)
+                .delete()
+                .addOnSuccessListener {
+                    Toast.makeText(requireContext(), "Emergency ended successfully", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "Failed to end emergency", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
-    //Funcao responsavel por carregar a imagem, e enquanto ela nao esta pronta mostra um placeholder
+    private fun openGoogleMaps(street: String?, streetNumber: String?, city: String?) {
+        val address = Uri.encode("$street $streetNumber, $city")
+        val gmmIntentUri = Uri.parse("geo:0,0?q=$address")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        startActivity(mapIntent)
+    }
+
     private fun loadImage(imageUrl: String?, imageView: ImageView) {
-        Glide.with(requireContext())
-            .load(imageUrl)
-            .apply(
-                RequestOptions()
-                    .placeholder(R.drawable.placeholder_image) // Placeholder image resource
-                    .error(R.drawable.error_image) // Error image resource
-            )
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(imageView)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    companion object {
-        fun newInstance(): EmergencyPopupDialogFragment {
-            return EmergencyPopupDialogFragment()
+        if (!imageUrl.isNullOrEmpty()) {
+            Picasso.get().load(imageUrl).into(imageView)
         }
+    }
+
+    private fun buildAddressString(street: String?, streetNumber: String?, city: String?): String {
+        val addressBuilder = StringBuilder()
+        if (!street.isNullOrEmpty()) {
+            addressBuilder.append(street)
+        }
+        if (!streetNumber.isNullOrEmpty()) {
+            addressBuilder.append(", $streetNumber")
+        }
+        if (!city.isNullOrEmpty()) {
+            addressBuilder.append(", $city")
+        }
+        return addressBuilder.toString()
     }
 }
+
+
 

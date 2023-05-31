@@ -29,13 +29,24 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/recyclerview_background"
                 android:padding="8dp"
                 tools:listitem="layout/list_item" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/messageTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:text="@string/inactive_message"
+                android:visibility="gone" />
 
+        </LinearLayout>
 
     </ScrollView>
 

@@ -1,24 +1,23 @@
 package com.example.teethkids
 
 import android.app.Dialog
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teethkids.databinding.ItemEmergencyRequestBinding
-import com.example.teethkids.EmergencyPopupDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 
 
 class EmergencyRequestsAdapter(
-    private val onActionClickListener: (emergencyRequest: EmergencyRequest, isAccepted: Boolean) -> Unit
+    private val onItemClick: (EmergencyRequest) -> Unit,
+    private val onDeclineClick: (EmergencyRequest) -> Unit
 ) : RecyclerView.Adapter<EmergencyRequestsAdapter.ViewHolder>() {
 
     private val emergencyRequests: MutableList<EmergencyRequest> = mutableListOf()
@@ -56,12 +55,14 @@ class EmergencyRequestsAdapter(
             binding.titleTextView.text = emergencyRequest.title
             binding.descriptionTextView.text = emergencyRequest.description
 
+            val context = itemView.context
+
             //Botao de aceitar o chamado
             binding.acceptButton.setOnClickListener {
                 getCurrentMedicId { medicId ->
                     if (medicId != null) {
                         val requestRef =
-                            emergencyRequest.id?.let { it1 ->
+                            emergencyRequest.id.let { it1 ->
                                 FirebaseFirestore.getInstance().collection("emergency_requests").document(
                                     it1
                                 )
@@ -74,23 +75,24 @@ class EmergencyRequestsAdapter(
                                     .addOnSuccessListener {
                                         showPopup(emergencyRequest)
                                     }.addOnFailureListener {
-                                        // Error storing medic ID
+
+                                        Toast.makeText(context, "Erro ao guardar o ID do medico no BD", Toast.LENGTH_SHORT).show()
                                     }
                             } else {
-                                // Maximo de medicos estourado ou nao foi possivel abrir o chamado
+                                Toast.makeText(context, "Maximo de medicos estourado ou nao foi possivel abrir o chamado", Toast.LENGTH_SHORT).show()
                             }
                         }?.addOnFailureListener {
-                            // Erro ao buscar o documento
+                            Toast.makeText(context, "Erro ao buscar o documento", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        // ID do medico nao disponivel
+                        Toast.makeText(context, "ID do medico nao disponivel", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
 
             //Botao de recusar o chamado
             binding.declineButton.setOnClickListener {
-                onActionClickListener(emergencyRequest, false)
+                onDeclineClick(emergencyRequest)
             }
         }
 
@@ -111,16 +113,13 @@ class EmergencyRequestsAdapter(
                         if (documentSnapshot.exists()) {
                             callback.invoke(documentSnapshot.id)
                         } else {
-                            // User document doesn't exist, handle accordingly
                             callback.invoke(null)
                         }
                     }
                     .addOnFailureListener {
-                        // Erro ao Buscar o ID do medico
                         callback.invoke(null)
                     }
             } else {
-                //Caso seja nulo:
                 callback.invoke(null)
             }
         }
@@ -136,7 +135,6 @@ class EmergencyRequestsAdapter(
             val imageView3 = dialog.findViewById<ImageView>(R.id.imageView3)
             val descriptionTextView = dialog.findViewById<TextView>(R.id.descriptionTextView)
             val addressTextView = dialog.findViewById<TextView>(R.id.addressTextView)
-            val closeButton = dialog.findViewById<Button>(R.id.closeButton)
 
             // Coloca a imagem do banco nas views
             Glide.with(itemView.context).load(emergencyRequest.imageUrl1).into(imageView1)
@@ -146,10 +144,6 @@ class EmergencyRequestsAdapter(
             val address = "${emergencyRequest.street}, ${emergencyRequest.streetNumber}, ${emergencyRequest.city}"
             addressTextView.text = address
 
-            // Click Listener do botao para fechar o pop-up
-            closeButton.setOnClickListener {
-                dialog.dismiss()
-            }
 
             dialog.show()
         }

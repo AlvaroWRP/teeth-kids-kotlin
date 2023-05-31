@@ -53,7 +53,7 @@ class Settings : Fragment() {
                 binding.switchStatus.isChecked = isActive
             }
             .addOnFailureListener { exception ->
-                // Handle the failure case
+                Toast.makeText(requireContext(), "Erro ao receber informacoes do BD", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -63,10 +63,10 @@ class Settings : Fragment() {
             .document(userId)
             .update("isActive", isActive)
             .addOnSuccessListener {
-                // Update successful
+                Toast.makeText(requireContext(), "Status Atualizado", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { exception ->
-                // Handle the failure case
+                Toast.makeText(requireContext(), "Erro ao atualizar o Status", Toast.LENGTH_SHORT).show()
             }
     }
 
