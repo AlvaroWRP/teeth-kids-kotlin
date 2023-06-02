@@ -71,7 +71,6 @@ class EmergencyPopupDialogFragment : DialogFragment() {
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), "Emergency ended successfully", Toast.LENGTH_SHORT).show()
                     dismiss()
-                    activity?.supportFragmentManager?.popBackStack()
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "Failed to end emergency", Toast.LENGTH_SHORT).show()
@@ -80,11 +79,12 @@ class EmergencyPopupDialogFragment : DialogFragment() {
     }
 
     private fun openGoogleMaps(street: String?, streetNumber: String?, city: String?) {
-        val address = Uri.encode("$street $streetNumber, $city")
-        val gmmIntentUri = Uri.parse("geo:0,0?q=$address")
-        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-        mapIntent.setPackage("com.google.android.apps.maps")
-        startActivity(mapIntent)
+        val intent = Intent(requireContext(), MapsActivity::class.java).apply {
+            putExtra(ARG_STREET, street)
+            putExtra(ARG_STREET_NUMBER, streetNumber)
+            putExtra(ARG_CITY, city)
+        }
+        startActivity(intent)
     }
 
     private fun loadImage(imageUrl: String?, imageView: ImageView) {
@@ -132,6 +132,7 @@ class EmergencyPopupDialogFragment : DialogFragment() {
         }
     }
 }
+
 
 
 
