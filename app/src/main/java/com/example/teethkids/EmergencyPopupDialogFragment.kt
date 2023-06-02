@@ -15,7 +15,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 
-
 class EmergencyPopupDialogFragment : DialogFragment() {
     private lateinit var binding: EmergencyPopupDialogFragmentBinding
     private val db: FirebaseFirestore = Firebase.firestore
@@ -32,28 +31,36 @@ class EmergencyPopupDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = EmergencyPopupDialogFragmentBinding.bind(view)
-
         val emergencyRequest: EmergencyRequest? = arguments?.getParcelable("emergencyRequest")
 
-        emergencyRequest?.let { request ->
-            loadImage(request.imageUrl1, binding.imageView1)
-            loadImage(request.imageUrl2, binding.imageView2)
-            loadImage(request.imageUrl3, binding.imageView3)
+        arguments?.let { args ->
+            val imageUrl1 = args.getString(ARG_IMAGE_URL_1)
+            val imageUrl2 = args.getString(ARG_IMAGE_URL_2)
+            val imageUrl3 = args.getString(ARG_IMAGE_URL_3)
+            val description = args.getString(ARG_DESCRIPTION)
+            val street = args.getString(ARG_STREET)
+            val streetNumber = args.getString(ARG_STREET_NUMBER)
+            val city = args.getString(ARG_CITY)
 
-            binding.descriptionTextView.text = request.description
+            loadImage(imageUrl1, binding.imageView1)
+            loadImage(imageUrl2, binding.imageView2)
+            loadImage(imageUrl3, binding.imageView3)
 
-            val address = buildAddressString(request.street, request.streetNumber, request.city)
+            binding.descriptionTextView.text = description
+
+            val address = buildAddressString(street, streetNumber, city)
             binding.addressTextView.text = address
 
             binding.openMapsButton.setOnClickListener {
-                openGoogleMaps(request.street, request.streetNumber, request.city)
+                openGoogleMaps(street, streetNumber, city)
             }
 
             binding.endEmergencyButton.setOnClickListener {
-                deleteEmergencyRequest(request)
+                deleteEmergencyRequest(emergencyRequest)
             }
+
         }
+
     }
 
     private fun deleteEmergencyRequest(emergencyRequest: EmergencyRequest?) {
@@ -64,6 +71,7 @@ class EmergencyPopupDialogFragment : DialogFragment() {
                 .addOnSuccessListener {
                     Toast.makeText(requireContext(), "Emergency ended successfully", Toast.LENGTH_SHORT).show()
                     dismiss()
+                    activity?.supportFragmentManager?.popBackStack()
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "Failed to end emergency", Toast.LENGTH_SHORT).show()
@@ -98,7 +106,34 @@ class EmergencyPopupDialogFragment : DialogFragment() {
         }
         return addressBuilder.toString()
     }
+
+    companion object {
+        private const val ARG_IMAGE_URL_1 = "image_url_1"
+        private const val ARG_IMAGE_URL_2 = "image_url_2"
+        private const val ARG_IMAGE_URL_3 = "image_url_3"
+        private const val ARG_DESCRIPTION = "description"
+        private const val ARG_STREET = "street"
+        private const val ARG_STREET_NUMBER = "street_number"
+        private const val ARG_CITY = "city"
+
+        fun newInstance(emergencyRequest: EmergencyRequest): EmergencyPopupDialogFragment {
+            val args = Bundle().apply {
+                putString(ARG_IMAGE_URL_1, emergencyRequest.imageUrl1)
+                putString(ARG_IMAGE_URL_2, emergencyRequest.imageUrl2)
+                putString(ARG_IMAGE_URL_3, emergencyRequest.imageUrl3)
+                putString(ARG_DESCRIPTION, emergencyRequest.description)
+                putString(ARG_STREET, emergencyRequest.street)
+                putString(ARG_STREET_NUMBER, emergencyRequest.streetNumber)
+                putString(ARG_CITY, emergencyRequest.city)
+            }
+            val fragment = EmergencyPopupDialogFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }
+
+
 
 
 
