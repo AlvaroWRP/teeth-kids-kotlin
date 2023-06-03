@@ -3,35 +3,43 @@ package com.example.teethkids
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import com.example.teethkids.databinding.ActivityMapsBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMapsBinding
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    private lateinit var mMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_maps)
 
-        val street = intent.getStringExtra(ARG_STREET)
-        val streetNumber = intent.getStringExtra(ARG_STREET_NUMBER)
-        val city = intent.getStringExtra(ARG_CITY)
-
-        val address = "$street $streetNumber, $city"
-        val uri = Uri.parse("geo:0,0?q=$address")
-        val mapIntent = Intent(Intent.ACTION_VIEW, uri)
-        mapIntent.setPackage("com.google.android.apps.maps")
-        startActivity(mapIntent)
-
-        binding.closeButton.setOnClickListener {
+        val closeButton: ImageButton = findViewById(R.id.closeButton)
+        closeButton.setOnClickListener {
             finish()
+        }
+
+        val address = intent.getStringExtra("address")
+        val location = intent.getParcelableExtra<LatLng>("location")
+        if (address != null && location != null) {
+            val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+            mapFragment.getMapAsync(this)
+
+            mMap.setOnMapLoadedCallback {
+                mMap.addMarker(MarkerOptions().position(location).title(address))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
+            }
         }
     }
 
-    companion object {
-        private const val ARG_STREET = "street"
-        private const val ARG_STREET_NUMBER = "street_number"
-        private const val ARG_CITY = "city"
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
     }
 }
