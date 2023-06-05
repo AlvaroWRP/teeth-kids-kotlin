@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -62,10 +63,14 @@ class Profile : Fragment() {
                         val name = document.getString("name")
                         val phone = document.getString("phone")
                         val bio = document.getString("biography")
+                        val profilePicUrl = document.getString("profilePicUrl")
 
                         binding.textViewName.text = name
                         binding.textViewPhone.text = phone
                         binding.textViewBio.text = bio
+                        profilePicUrl?.let {
+                            loadProfilePicture(profilePicUrl)
+                        }
                     } else {
                         Log.d(TAG, "User document does not exist")
                     }
@@ -86,6 +91,12 @@ class Profile : Fragment() {
                 requestCameraPermission()
             }
         }
+    }
+
+    private fun loadProfilePicture(profilePicUrl: String) {
+        Glide.with(requireContext())
+            .load(profilePicUrl)
+            .into(binding.imageViewProfile)
     }
 
     private fun requestCameraPermission() {
