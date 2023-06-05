@@ -57,4 +57,5 @@
     <string name="inactive_message">Voce esta indisponivel no momento, mude esta opcao nas configuracoes para receber novos chamados</string>
     <string name="maps">Abrir no Maps</string>
     <string name="end">Acabar emergencia</string>
+    <string name="percentage_format">%d%%</string>
 </resources>

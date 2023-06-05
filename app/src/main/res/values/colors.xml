@@ -8,4 +8,5 @@
     <color name="red">#FF1F1F</color>
     <color name="green">#5AFF2B</color>
     <color name="transparent">#00F40000</color>
+    <color name="progress_bar_color">#FF4081</color>
 </resources>
