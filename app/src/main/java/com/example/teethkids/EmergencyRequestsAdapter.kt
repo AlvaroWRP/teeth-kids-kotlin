@@ -1,19 +1,20 @@
 package com.example.teethkids
 
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.teethkids.databinding.ItemEmergencyRequestBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.bumptech.glide.Glide
-
 
 class EmergencyRequestsAdapter(
     private val onItemClick: (EmergencyRequest) -> Unit,
@@ -21,6 +22,7 @@ class EmergencyRequestsAdapter(
 ) : RecyclerView.Adapter<EmergencyRequestsAdapter.ViewHolder>() {
 
     private val emergencyRequests: MutableList<EmergencyRequest> = mutableListOf()
+    private lateinit var context: Context
 
     //Responsavel por atualizar o data set do adapter com uma nova lista de objetos do "EmergencyRequest"
     fun setData(data: List<EmergencyRequest>) {
@@ -31,7 +33,8 @@ class EmergencyRequestsAdapter(
 
     //Eh chamada pelo RecyclerView pra criar um novo ViewHolder para os itens da lista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
+        context = parent.context
+        val inflater = LayoutInflater.from(context)
         val binding = ItemEmergencyRequestBinding.inflate(inflater, parent, false)
         return ViewHolder(binding)
     }
@@ -55,8 +58,6 @@ class EmergencyRequestsAdapter(
             binding.titleTextView.text = emergencyRequest.title
             binding.descriptionTextView.text = emergencyRequest.description
 
-            val context = itemView.context
-
             //Botao de aceitar o chamado
             binding.acceptButton.setOnClickListener {
                 getCurrentMedicId { medicId ->
@@ -75,7 +76,6 @@ class EmergencyRequestsAdapter(
                                     .addOnSuccessListener {
                                         showPopup(emergencyRequest)
                                     }.addOnFailureListener {
-
                                         Toast.makeText(context, "Erro ao guardar o ID do medico no BD", Toast.LENGTH_SHORT).show()
                                     }
                             } else {
@@ -94,6 +94,7 @@ class EmergencyRequestsAdapter(
             binding.declineButton.setOnClickListener {
                 onDeclineClick(emergencyRequest)
             }
+
         }
 
         //Funcao que pega o ID do medico atual
@@ -144,10 +145,7 @@ class EmergencyRequestsAdapter(
             val address = "${emergencyRequest.street}, ${emergencyRequest.streetNumber}, ${emergencyRequest.city}"
             addressTextView.text = address
 
-
             dialog.show()
         }
-
     }
 }
-

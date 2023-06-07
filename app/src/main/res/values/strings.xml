@@ -58,4 +58,7 @@
     <string name="maps">Abrir no Maps</string>
     <string name="end">Acabar emergencia</string>
     <string name="percentage_format">%d%%</string>
+    <string name="accept">Aceitar</string>
+    <string name="decline">Recusar</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

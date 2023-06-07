@@ -4,24 +4,19 @@
     android:orientation="vertical"
     android:background="@drawable/blue_bg">
 
-    <com.example.teethkids.PieChartView
-        android:id="@+id/reviewsPieChart"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal" />
-
     <TextView
-        android:id="@+id/percentageTextView"
+        android:id="@+id/averageRatingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="18sp"
-        android:textColor="@android:color/white" />
+        android:layout_gravity="center_horizontal"
+        android:textSize="24sp"
+        android:text="Average Rating: 0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:background="@drawable/recyclerview_background"/>
 
 </LinearLayout>

@@ -46,56 +46,45 @@ class Rating : Fragment() {
         adapter = ReviewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
-
-        pieChartView = view.findViewById(R.id.reviewsPieChart)
-        percentageTextView = view.findViewById(R.id.percentageTextView)
     }
 
     private fun fetchReviews() {
-        db.collection("reviews")
-            .whereEqualTo("medic", medicId)
+        db.collection("dentists_ratings")
+            .document(medicId)
+            .collection("ratings")
             .get()
             .addOnSuccessListener { querySnapshot ->
                 val reviews = mutableListOf<Review>()
-                var goodCount = 0
-                var badCount = 0
+                var totalRating = 0.0f
+                var maxRating = 0.0f
 
                 for (document in querySnapshot) {
-                    val reviewText = document.getString("review") ?: ""
-                    val isGood = document.getBoolean("isGood") ?: false
-                    val review = Review(reviewText, isGood)
-                    reviews.add(review)
+                    val reviewText = document.getString("comment") ?: ""
+                    val rating = document.getDouble("rating")?.toFloat() ?: 0.0f
 
-                    if (isGood) {
-                        goodCount++
-                    } else {
-                        badCount++
-                    }
+                    totalRating += rating
+                    maxRating += 5.0f
+
+                    val review = Review(reviewText, rating, 5.0f)
+                    reviews.add(review)
                 }
 
                 adapter.setData(reviews)
-                updatePieChart(goodCount, badCount)
+                updateAverageRating(totalRating, maxRating)
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "Failed to fetch reviews", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun updatePieChart(goodCount: Int, badCount: Int) {
-        val totalReviews = goodCount + badCount
 
-        val goodPercentage = if (totalReviews > 0) goodCount.toFloat() / totalReviews else 0f
-        val badPercentage = if (totalReviews > 0) badCount.toFloat() / totalReviews else 0f
-
-        pieChartView.setPercentage(goodPercentage, badPercentage)
-
-        val goodPercentageText = "${(goodPercentage * 100).toInt()}%"
-        val badPercentageText = "${(badPercentage * 100).toInt()}%"
-
-        val percentageText = "$goodPercentageText / $badPercentageText"
-        percentageTextView.text = percentageText
+    private fun updateAverageRating(averageRating: Float, maxRating: Float) {
+        val averageRatingTextView = view?.findViewById<TextView>(R.id.averageRatingTextView)
+        averageRatingTextView?.text = "Average Rating: $averageRating"
     }
 }
+
+
 
 
 

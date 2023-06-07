@@ -1,5 +1,6 @@
 package com.example.teethkids
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.teethkids.databinding.EmergencyPopupDialogFragmentBinding
@@ -52,11 +54,15 @@ class EmergencyPopupDialogFragment : DialogFragment() {
             binding.addressTextView.text = address
 
             binding.openMapsButton.setOnClickListener {
-                openGoogleMaps(street, streetNumber, city)
+                openGoogleMaps(requireContext(), street, streetNumber, city)
             }
 
             binding.endEmergencyButton.setOnClickListener {
                 deleteEmergencyRequest(emergencyRequest)
+            }
+
+            binding.closeButton.setOnClickListener {
+                dismiss()
             }
 
         }
@@ -78,14 +84,13 @@ class EmergencyPopupDialogFragment : DialogFragment() {
         }
     }
 
-    private fun openGoogleMaps(street: String?, streetNumber: String?, city: String?) {
-        val intent = Intent(requireContext(), MapsActivity::class.java).apply {
-            putExtra(ARG_STREET, street)
-            putExtra(ARG_STREET_NUMBER, streetNumber)
-            putExtra(ARG_CITY, city)
-        }
-        startActivity(intent)
+    private fun openGoogleMaps(context: Context, street: String?, streetNumber: String?, city: String?) {
+        val address = buildAddressString(street, streetNumber, city)
+        val intent = Intent(context, MapsActivity::class.java)
+        intent.putExtra("address", address)
+        context.startActivity(intent)
     }
+
 
     private fun loadImage(imageUrl: String?, imageView: ImageView) {
         if (!imageUrl.isNullOrEmpty()) {
@@ -132,9 +137,3 @@ class EmergencyPopupDialogFragment : DialogFragment() {
         }
     }
 }
-
-
-
-
-
-
