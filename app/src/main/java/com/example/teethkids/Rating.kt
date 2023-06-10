@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class Rating : Fragment() {
-
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
     private lateinit var adapter: ReviewAdapter
@@ -68,42 +67,17 @@ class Rating : Fragment() {
                     val review = Review(reviewText, rating, 5.0f)
                     reviews.add(review)
                 }
-
                 adapter.setData(reviews)
                 updateAverageRating(totalRating, maxRating)
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Failed to fetch reviews", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed to fetch reviews", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
-
 
     private fun updateAverageRating(averageRating: Float, maxRating: Float) {
         val averageRatingTextView = view?.findViewById<TextView>(R.id.averageRatingTextView)
         averageRatingTextView?.text = "Average Rating: $averageRating"
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ThirdCreateAccountActivity : AppCompatActivity() {
-
     lateinit var binding: ThirdCreateAccountActivityBinding
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
@@ -39,16 +38,19 @@ class ThirdCreateAccountActivity : AppCompatActivity() {
                     )
                 )
                     .addOnSuccessListener {
-                        Toast.makeText(this, "Biografia cadastrada com sucesso!", Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            this,
+                            "Biografia cadastrada com sucesso!",
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                         val intent = Intent(this, EmergencyActivity::class.java)
                         startActivity(intent)
                     }
 
-            }else{
-                Toast.makeText(this, "Biografia nao pode ser vazia", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "A biografia não pode estar vazia", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
 }

@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SecondCreateAccountScreen : AppCompatActivity() {
-
     lateinit var binding: SecondCreateAccountScreenActivityBinding
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
@@ -33,7 +32,6 @@ class SecondCreateAccountScreen : AppCompatActivity() {
             val pass = Intent(this, FirstCreateAccountScreen::class.java)
             startActivity(pass)
         }
-
     }
 
     private fun saveAddress() {
@@ -48,7 +46,6 @@ class SecondCreateAccountScreen : AppCompatActivity() {
         val comp3 = binding.edtInputComp3.text.toString()
 
         if (street.isNotEmpty() && number.isNotEmpty()) {
-
             val firstAddress = hashMapOf(
                 "address1" to "$street, $number, $comp",
             )
@@ -61,22 +58,31 @@ class SecondCreateAccountScreen : AppCompatActivity() {
                 "address2" to "$street3, $number3, $comp3",
             )
 
-
             firestore.collection("users")
                 .document(userId)
-                .update("address1", firstAddress, "address2", secondAddress, "address3", thirdAddress)
+                .update(
+                    "address1",
+                    firstAddress,
+                    "address2",
+                    secondAddress,
+                    "address3",
+                    thirdAddress
+                )
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Endereco cadastrado com sucesso!", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Endereço cadastrado com sucesso!", Toast.LENGTH_SHORT)
                         .show()
                     val intent = Intent(this, ThirdCreateAccountActivity::class.java)
                     startActivity(intent)
                 }
                 .addOnFailureListener { exception ->
-                    Toast.makeText(this, "Falha ao Cadastrar Endereco", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Falha ao cadastrar endereço", Toast.LENGTH_SHORT).show()
                 }
-        }else{
-            Toast.makeText(this, "Ao menos um endereco e necessario para o cadastro", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(
+                this,
+                "Ao menos um endereço é necessário para o cadastro",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
-
 }

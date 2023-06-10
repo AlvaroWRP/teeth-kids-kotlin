@@ -172,8 +172,3 @@ class Profile : Fragment() {
         private const val REQUEST_CODE_CAMERA = 100
     }
 }
-
-
-
-
-

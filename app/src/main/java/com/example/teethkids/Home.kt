@@ -1,6 +1,5 @@
 package com.example.teethkids
 
-import com.example.teethkids.EmergencyRequestsAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class Home : Fragment() {
-
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: EmergencyRequestsAdapter
     private val db: FirebaseFirestore = Firebase.firestore
@@ -69,7 +67,11 @@ class Home : Fragment() {
                 adapter.setData(emergencyRequests)
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Erro ao pegar dados do Banco de Dados", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Erro ao pegar dados do Banco de Dados",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 
@@ -93,7 +95,11 @@ class Home : Fragment() {
                     }
                 }
                 .addOnFailureListener {
-                    Toast.makeText(requireContext(), "Erro ao obter o ID do médico", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Erro ao obter o ID do médico",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         }
     }
@@ -104,7 +110,6 @@ class Home : Fragment() {
         bundle.putParcelable("emergencyRequest", emergencyRequest)
         popupDialogFragment.arguments = bundle
         popupDialogFragment.show(parentFragmentManager, "emergency_popup")
-
     }
 
     private fun declineEmergencyRequest(emergencyRequest: EmergencyRequest) {
@@ -119,17 +124,30 @@ class Home : Fragment() {
                         .document(emergencyRequest.id)
                         .update("medics", updatedMedics)
                         .addOnSuccessListener {
-                            Toast.makeText(requireContext(), "Chamado recusado com sucesso", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Chamado recusado com sucesso",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                         .addOnFailureListener {
-                            Toast.makeText(requireContext(), "Erro ao recusar o chamado", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Erro ao recusar o chamado",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                 } else {
-                    Toast.makeText(requireContext(), "Chamado já recusado anteriormente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Chamado já recusado anteriormente",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Erro ao recusar o chamado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Erro ao recusar o chamado", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 }

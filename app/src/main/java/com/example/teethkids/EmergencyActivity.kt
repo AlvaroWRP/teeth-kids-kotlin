@@ -5,9 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.teethkids.databinding.EmergencyActivityBinding
 
-
 class EmergencyActivity : AppCompatActivity() {
-
     lateinit var binding: EmergencyActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,37 +15,21 @@ class EmergencyActivity : AppCompatActivity() {
         replaceFragment(Home())
 
         binding.bottomNavigation.setOnItemSelectedListener {
-
-            when(it.itemId) {
-
+            when (it.itemId) {
                 R.id.home -> replaceFragment(Home())
                 R.id.reputation -> replaceFragment(Rating())
                 R.id.profile -> replaceFragment(Profile())
                 R.id.settings -> replaceFragment(Settings())
-
-                else -> {
-
-
-                }
-
             }
-
-                true
-
-
+            true
         }
-
     }
 
-    private fun replaceFragment(fragment : Fragment){
-
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout,fragment)
+
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
-
     }
-
-
-
-    }
+}

@@ -8,7 +8,6 @@ import com.example.teethkids.databinding.LogInActivityBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class LogInActivity : AppCompatActivity() {
-
     lateinit var binding: LogInActivityBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -38,17 +37,16 @@ class LogInActivity : AppCompatActivity() {
             val email = binding.edtInputEmail.text.toString()
             val pass = binding.edtInputPassword.text.toString()
 
-            if (email.isNotEmpty() && pass.isNotEmpty()){
-
-                    firebaseAuth.signInWithEmailAndPassword(email , pass).addOnCompleteListener {
-                        if (it.isSuccessful){
-                            val intent = Intent(this, EmergencyActivity::class.java)
-                            startActivity(intent)
-                        }else{
-                            Toast.makeText(this, it.exception.toString() , Toast.LENGTH_SHORT).show()
-                        }
+            if (email.isNotEmpty() && pass.isNotEmpty()) {
+                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val intent = Intent(this, EmergencyActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
-            }else{
+                }
+            } else {
                 Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
             }
         }

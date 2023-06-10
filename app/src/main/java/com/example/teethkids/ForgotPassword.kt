@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.teethkids.databinding.ForgotPasswordActivityBinding
 
 class ForgotPassword : AppCompatActivity() {
-
     lateinit var binding: ForgotPasswordActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

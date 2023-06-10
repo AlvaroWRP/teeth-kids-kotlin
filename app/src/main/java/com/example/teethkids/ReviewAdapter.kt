@@ -4,12 +4,10 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.graphics.Color
-
 
 class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
     private val reviews = mutableListOf<Review>()
@@ -51,15 +49,4 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
             ratingBar.isClickable = false
         }
     }
-
-
 }
-
-
-
-
-
-
-
-
-

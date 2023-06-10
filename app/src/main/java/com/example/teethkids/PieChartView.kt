@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.view.View
 
 class PieChartView(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
-
     private val goodColor = Color.GREEN
     private val badColor = Color.RED
     private var goodPercentage: Float = 0f
@@ -40,4 +39,3 @@ class PieChartView(context: Context, attrs: AttributeSet? = null) : View(context
         invalidate()
     }
 }
-

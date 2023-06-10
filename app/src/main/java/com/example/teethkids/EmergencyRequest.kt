@@ -2,7 +2,6 @@ package com.example.teethkids
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.firebase.firestore.DocumentSnapshot
 
 data class EmergencyRequest(
     val id: String,
