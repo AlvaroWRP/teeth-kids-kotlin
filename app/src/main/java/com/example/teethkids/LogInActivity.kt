@@ -23,11 +23,6 @@ class LogInActivity : AppCompatActivity() {
             startActivity(pass)
         }
 
-        binding.tvForgotPassword.setOnClickListener {
-            val pass = Intent(this, ForgotPassword::class.java)
-            startActivity(pass)
-        }
-
         binding.tvCreateNewAccount.setOnClickListener {
             val pass = Intent(this, FirstCreateAccountScreen::class.java)
             startActivity(pass)

@@ -51,17 +51,10 @@ class EmergencyPopupDialogFragment : DialogFragment() {
             val address = buildAddressString(street, streetNumber, city)
             binding.addressTextView.text = address
 
-            binding.openMapsButton.setOnClickListener {
-                openGoogleMaps(requireContext(), street, streetNumber, city)
-            }
-
             binding.endEmergencyButton.setOnClickListener {
                 deleteEmergencyRequest(emergencyRequest)
             }
 
-            binding.closeButton.setOnClickListener {
-                dismiss()
-            }
         }
     }
 
@@ -83,18 +76,6 @@ class EmergencyPopupDialogFragment : DialogFragment() {
                         .show()
                 }
         }
-    }
-
-    private fun openGoogleMaps(
-        context: Context,
-        street: String?,
-        streetNumber: String?,
-        city: String?
-    ) {
-        val address = buildAddressString(street, streetNumber, city)
-        val intent = Intent(context, MapsActivity::class.java)
-        intent.putExtra("address", address)
-        context.startActivity(intent)
     }
 
     private fun loadImage(imageUrl: String?, imageView: ImageView) {

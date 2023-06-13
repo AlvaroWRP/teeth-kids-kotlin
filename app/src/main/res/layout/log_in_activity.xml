@@ -91,20 +91,11 @@
         android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="610dp"
-        android:text="@string/forgot_password"
-        android:textColor="@color/black" />
-
-    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_create_new_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="640dp"
+        android:layout_marginTop="600dp"
         android:text="@string/create_new_account"
         android:textColor="@color/black" />
 

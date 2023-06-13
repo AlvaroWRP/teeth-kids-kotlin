@@ -19,9 +19,6 @@ class Rating : Fragment() {
 
     private var medicId: String = ""
 
-    private lateinit var pieChartView: PieChartView
-    private lateinit var percentageTextView: TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
@@ -56,28 +53,32 @@ class Rating : Fragment() {
                 val reviews = mutableListOf<Review>()
                 var totalRating = 0.0f
                 var maxRating = 0.0f
+                var reviewCount = 0
 
                 for (document in querySnapshot) {
-                    val reviewText = document.getString("comment") ?: ""
-                    val rating = document.getDouble("rating")?.toFloat() ?: 0.0f
+                    val reviewText = document.getString("comentario") ?: ""
+                    val rating = document.getDouble("avaliacao")?.toFloat() ?: 0.0f
 
                     totalRating += rating
                     maxRating += 5.0f
+                    reviewCount++
 
                     val review = Review(reviewText, rating, 5.0f)
                     reviews.add(review)
                 }
+
                 adapter.setData(reviews)
-                updateAverageRating(totalRating, maxRating)
+                updateAverageRating(totalRating, maxRating, reviewCount)
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Failed to fetch reviews", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Falha ao receber as avaliacoes", Toast.LENGTH_SHORT)
                     .show()
             }
     }
 
-    private fun updateAverageRating(averageRating: Float, maxRating: Float) {
+    private fun updateAverageRating(totalRating: Float, maxRating: Float, reviewCount: Int) {
+        val averageRating = if (reviewCount > 0) totalRating / reviewCount else 0.0f
         val averageRatingTextView = view?.findViewById<TextView>(R.id.averageRatingTextView)
-        averageRatingTextView?.text = "Average Rating: $averageRating"
+        averageRatingTextView?.text = "Sua nota: $averageRating"
     }
 }
