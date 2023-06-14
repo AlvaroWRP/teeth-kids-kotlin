@@ -16,7 +16,6 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/recyclerview_background"/>
+        android:layout_weight="1"/>
 
 </LinearLayout>

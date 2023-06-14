@@ -56,8 +56,8 @@ class Rating : Fragment() {
                 var reviewCount = 0
 
                 for (document in querySnapshot) {
-                    val reviewText = document.getString("comentario") ?: ""
-                    val rating = document.getDouble("avaliacao")?.toFloat() ?: 0.0f
+                    val reviewText = document.getString("comment") ?: ""
+                    val rating = document.getDouble("rating")?.toFloat() ?: 0.0f
 
                     totalRating += rating
                     maxRating += 5.0f

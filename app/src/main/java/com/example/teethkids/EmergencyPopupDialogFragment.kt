@@ -1,13 +1,13 @@
 package com.example.teethkids
 
-import android.content.Context
-import android.content.Intent
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.compose.ui.window.isPopupLayout
 import androidx.fragment.app.DialogFragment
 import com.example.teethkids.databinding.EmergencyPopupDialogFragmentBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -52,29 +52,9 @@ class EmergencyPopupDialogFragment : DialogFragment() {
             binding.addressTextView.text = address
 
             binding.endEmergencyButton.setOnClickListener {
-                deleteEmergencyRequest(emergencyRequest)
+                dismissNow()
             }
 
-        }
-    }
-
-    private fun deleteEmergencyRequest(emergencyRequest: EmergencyRequest?) {
-        if (emergencyRequest != null) {
-            db.collection("emergency_requests")
-                .document(emergencyRequest.id)
-                .delete()
-                .addOnSuccessListener {
-                    Toast.makeText(
-                        requireContext(),
-                        "Emergency ended successfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    dismiss()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(requireContext(), "Failed to end emergency", Toast.LENGTH_SHORT)
-                        .show()
-                }
         }
     }
 
