@@ -56,84 +56,14 @@ class EmergencyRequestsAdapter(
             binding.titleTextView.text = emergencyRequest.title
             binding.descriptionTextView.text = emergencyRequest.description
 
+            loadImages(emergencyRequest.imageUrls)
+
             // Botao de aceitar o chamado
             binding.acceptButton.setOnClickListener {
-                getCurrentMedicId { medicId ->
-                    if (medicId != null) {
-                        val requestRef =
-                            emergencyRequest.id.let { it1 ->
-                                FirebaseFirestore.getInstance().collection("emergency_requests")
-                                    .document(
-                                        it1
-                                    )
-                            }
-                        // Checa se o numero maximo de medicos ja aceitou o chamado e abre o mesmo
-                        requestRef?.get()?.addOnSuccessListener { documentSnapshot ->
-                            val medics = documentSnapshot.get("medics") as? List<*>
-                            if ((medics != null) && (medics.size < 5) && !medics.contains(medicId)) {
-                                requestRef.update("medics", FieldValue.arrayUnion(medicId))
-                                    .addOnSuccessListener {
-                                        showPopup(emergencyRequest)
-                                    }.addOnFailureListener {
-                                        Toast.makeText(
-                                            context,
-                                            "Erro ao guardar o ID do médico no BD",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "Número máximo de médicos atingido ou não foi possível abrir o chamado",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }?.addOnFailureListener {
-                            Toast.makeText(
-                                context,
-                                "Erro ao buscar o documento",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    } else {
-                        Toast.makeText(context, "ID do médico não disponível", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            }
-            // Botao de recusar o chamado
-            binding.declineButton.setOnClickListener {
-                onDeclineClick(emergencyRequest)
+                showPopup(emergencyRequest)
             }
         }
 
-        //Funcao que pega o ID do medico atual
-        private fun getCurrentMedicId(callback: (String?) -> Unit) {
-            val firebaseAuth = FirebaseAuth.getInstance()
-            val currentUser = firebaseAuth.currentUser
-
-            //Checa se o ID do usuario e nulo
-            if (currentUser != null) {
-                val currentUserId = currentUser.uid
-                val usersCollection = FirebaseFirestore.getInstance().collection("users")
-                val userDocument = usersCollection.document(currentUserId)
-
-                //Pega o ID do medico logado (Document ID)
-                userDocument.get()
-                    .addOnSuccessListener { documentSnapshot ->
-                        if (documentSnapshot.exists()) {
-                            callback.invoke(documentSnapshot.id)
-                        } else {
-                            callback.invoke(null)
-                        }
-                    }
-                    .addOnFailureListener {
-                        callback.invoke(null)
-                    }
-            } else {
-                callback.invoke(null)
-            }
-        }
 
         // Funcao que cuida do pop-up
         private fun showPopup(emergencyRequest: EmergencyRequest) {
@@ -153,10 +83,30 @@ class EmergencyRequestsAdapter(
             Glide.with(itemView.context).load(emergencyRequest.imageUrl3).into(imageView3)
             descriptionTextView.text = emergencyRequest.description
             val address =
-                "${emergencyRequest.street}, ${emergencyRequest.streetNumber}, ${emergencyRequest.city}"
+                "${emergencyRequest.street}, ${emergencyRequest.number}, ${emergencyRequest.city}"
             addressTextView.text = address
 
             dialog.show()
         }
+
+        // Manda as imagens para os imageViews
+        private fun loadImages(imageUrls: List<String>) {
+            // Remove qualquer imageView ja existente
+            binding.imageContainer.removeAllViews()
+
+            // Carrega as urls das imagens em image views diferentes
+            for (imageUrl in imageUrls) {
+                val imageView = ImageView(context)
+                imageView.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                binding.imageContainer.addView(imageView)
+
+                // Usa o glide para carregar as imagens
+                Glide.with(context).load(imageUrl).into(imageView)
+            }
+        }
     }
 }
+

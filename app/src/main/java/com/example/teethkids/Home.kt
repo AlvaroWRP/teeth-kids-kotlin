@@ -37,6 +37,7 @@ class Home : Fragment() {
         fetchCurrentMedicId()
     }
 
+    // Responsavel por configurar o recyclerview
     private fun setupRecyclerView() {
         adapter = EmergencyRequestsAdapter(
             onItemClick = { emergencyRequest -> showPopupDialog(emergencyRequest) }
@@ -45,6 +46,7 @@ class Home : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
+    // Pega o conteudo dos chamados de emergencia do banco
     private fun fetchEmergencyRequests() {
         db.collection("emergency_requests")
             .get()
@@ -59,10 +61,11 @@ class Home : Fragment() {
                     val imageUrl2 = document.getString("imageUrl2")
                     val imageUrl3 = document.getString("imageUrl3")
                     val street = document.getString("street")
-                    val streetNumber = document.getString("streetNumber")
+                    val number = document.getString("number")
+                    val imageUrls = listOfNotNull(imageUrl1, imageUrl2, imageUrl3)
                     val emergencyRequest = EmergencyRequest(
                         id, title, description, city,
-                        imageUrl1, imageUrl2, imageUrl3, street, streetNumber
+                        imageUrl1, imageUrl2, imageUrl3, street, number, imageUrls
                     )
                     emergencyRequests.add(emergencyRequest)
                 }
@@ -77,6 +80,7 @@ class Home : Fragment() {
             }
     }
 
+    //Pega o ID do medico que esta logado
     private fun fetchCurrentMedicId() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
@@ -106,6 +110,7 @@ class Home : Fragment() {
         }
     }
 
+    //Cuida do popup, basicamente eh responsavel por abri-lo
     private fun showPopupDialog(emergencyRequest: EmergencyRequest) {
         val popupDialogFragment = EmergencyPopupDialogFragment()
         val bundle = Bundle()
@@ -113,7 +118,7 @@ class Home : Fragment() {
         popupDialogFragment.arguments = bundle
         popupDialogFragment.show(parentFragmentManager, "emergency_popup")
     }
-
+    //Responsavel por recusar os chamados, aqui ele apenas apaga o medico atual da lista de medicos de um chamado
     private fun declineEmergencyRequest(emergencyRequest: EmergencyRequest) {
         db.collection("emergency_requests")
             .document(emergencyRequest.id)

@@ -12,7 +12,8 @@ data class EmergencyRequest(
     val imageUrl2: String?,
     val imageUrl3: String?,
     val street: String?,
-    val streetNumber: String?
+    val number: String?,
+    val imageUrls: List<String>
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().orEmpty(),
@@ -23,7 +24,8 @@ data class EmergencyRequest(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.createStringArrayList().orEmpty() // Read List<String> from Parcel
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -35,7 +37,8 @@ data class EmergencyRequest(
         parcel.writeString(imageUrl2)
         parcel.writeString(imageUrl3)
         parcel.writeString(street)
-        parcel.writeString(streetNumber)
+        parcel.writeString(number)
+        parcel.writeStringList(imageUrls)
     }
 
     override fun describeContents(): Int {

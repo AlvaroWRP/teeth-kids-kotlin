@@ -24,17 +24,21 @@ class SecondCreateAccountScreen : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         userId = intent.getStringExtra("userId").toString()
 
+        // Configura o clique do botão "Continuar"
         binding.btnContinue.setOnClickListener {
             saveAddress()
         }
 
+        // Configura o clique do botão "Voltar"
         binding.btnGoBack.setOnClickListener {
             val pass = Intent(this, FirstCreateAccountScreen::class.java)
             startActivity(pass)
         }
     }
 
+    // Função para salvar o endereço no Firebase Firestore
     private fun saveAddress() {
+        // Obtém os valores dos campos de texto para cada endereço
         val street = binding.edtInputStreet.text.toString()
         val number = binding.edtInputNumber.text.toString()
         val comp = binding.edtInputComp.text.toString()
@@ -45,19 +49,24 @@ class SecondCreateAccountScreen : AppCompatActivity() {
         val number3 = binding.edtInputNumber3.text.toString()
         val comp3 = binding.edtInputComp3.text.toString()
 
+        // Verifica se o campo de rua e número do primeiro endereço estão preenchidos
         if (street.isNotEmpty() && number.isNotEmpty()) {
+            // Cria um HashMap para o primeiro endereço
             val firstAddress = hashMapOf(
                 "address1" to "$street, $number, $comp",
             )
 
+            // Cria um HashMap para o segundo endereço
             val secondAddress = hashMapOf(
                 "address2" to "$street2, $number2, $comp2",
             )
 
+            // Cria um HashMap para o terceiro endereço
             val thirdAddress = hashMapOf(
                 "address2" to "$street3, $number3, $comp3",
             )
 
+            // Atualiza os campos de endereço no documento do usuário no Firebase Firestore
             firestore.collection("users")
                 .document(userId)
                 .update(
@@ -86,3 +95,4 @@ class SecondCreateAccountScreen : AppCompatActivity() {
         }
     }
 }
+

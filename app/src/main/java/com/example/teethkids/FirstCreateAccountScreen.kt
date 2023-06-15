@@ -17,30 +17,36 @@ class FirstCreateAccountScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.first_create_account_screen_activity)
 
+        // Infla o layout e obter uma referência para o elemento raiz
         binding = FirstCreateAccountScreenActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Obtem instâncias do FirebaseAuth e FirebaseFirestore
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
+        // Configura o clique do botão "Voltar"
         binding.btnGoBack.setOnClickListener {
             val pass = Intent(this, MainActivity::class.java)
             startActivity(pass)
         }
 
+        // Configura o clique do botão "Continuar"
         binding.btnContinue.setOnClickListener {
             registerUser()
         }
     }
 
+    // Método para registrar um usuário
     private fun registerUser() {
+        // Obtem os valores inseridos nos campos de entrada
         val email = binding.edtInputEmail.text.toString()
         val password = binding.edtInputPassword.text.toString()
         val confirmPass = binding.edtConfirmPassword.text.toString()
         val name = binding.edtInputName.text.toString()
         val phoneNumber = binding.edtInputPhone.text.toString()
 
-        // Register user with email and password
+        // Registra o usuário com email e senha
         if (email.isNotEmpty() && password.isNotEmpty() && confirmPass.isNotEmpty()) {
             if (password == confirmPass) {
                 auth.createUserWithEmailAndPassword(email, password)
@@ -48,7 +54,7 @@ class FirstCreateAccountScreen : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val user = auth.currentUser
 
-                            // Save name and phone number to Firestore
+                            // Salva nome e número de telefone no Firestore
                             val userMap = hashMapOf(
                                 "email" to email,
                                 "name" to name,
@@ -89,3 +95,4 @@ class FirstCreateAccountScreen : AppCompatActivity() {
         }
     }
 }
+

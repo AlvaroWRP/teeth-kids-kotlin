@@ -25,16 +25,16 @@ import com.example.teethkids.databinding.FragmentProfileBinding
 import java.io.ByteArrayOutputStream
 
 class Profile : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+    private var _binding: FragmentProfileBinding? = null // Binding para o layout do fragmento
+    private val binding get() = _binding!! // Obtém a referência ao binding
 
-    private lateinit var firestore: FirebaseFirestore
-    private lateinit var storageRef: StorageReference
-    private lateinit var activity: Activity
+    private lateinit var firestore: FirebaseFirestore // Referência ao Firestore
+    private lateinit var storageRef: StorageReference // Referência ao armazenamento Firebase
+    private lateinit var activity: Activity // Referência à atividade que contém o fragmento
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activity = requireActivity()
+        activity = requireActivity() // Obtém a referência à atividade
     }
 
     override fun onCreateView(
@@ -42,34 +42,34 @@ class Profile : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentProfileBinding.inflate(inflater, container, false) // Infla o layout do fragmento
+        return binding.root // Retorna a raiz do layout
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        firestore = FirebaseFirestore.getInstance()
-        storageRef = FirebaseStorage.getInstance().reference
+        firestore = FirebaseFirestore.getInstance() // Inicializa o Firestore
+        storageRef = FirebaseStorage.getInstance().reference // Inicializa a referência ao armazenamento Firebase
 
-        val currentUser = FirebaseAuth.getInstance().currentUser
+        val currentUser = FirebaseAuth.getInstance().currentUser // Obtém o usuário atualmente autenticado
         currentUser?.let {
-            val userId = it.uid
+            val userId = it.uid // Obtém o ID do usuário
 
-            val userRef = firestore.collection("users").document(userId)
+            val userRef = firestore.collection("users").document(userId) // Referência ao documento do usuário
             userRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        val name = document.getString("name")
-                        val phone = document.getString("phone")
-                        val bio = document.getString("biography")
-                        val profilePicUrl = document.getString("profilePicUrl")
+                        val name = document.getString("name") // Obtém o nome do usuário do documento
+                        val phone = document.getString("phone") // Obtém o telefone do usuário do documento
+                        val bio = document.getString("biography") // Obtém a biografia do usuário do documento
+                        val profilePicUrl = document.getString("profilePicUrl") // Obtém a URL da foto de perfil do usuário do documento
 
-                        binding.textViewName.text = name
-                        binding.textViewPhone.text = phone
-                        binding.textViewBio.text = bio
+                        binding.textViewName.text = name // Define o nome no TextView
+                        binding.textViewPhone.text = phone // Define o telefone no TextView
+                        binding.textViewBio.text = bio // Define a biografia no TextView
                         profilePicUrl?.let {
-                            loadProfilePicture(profilePicUrl)
+                            loadProfilePicture(profilePicUrl) // Carrega a foto de perfil do usuário
                         }
                     } else {
                         Log.d(TAG, "User document does not exist")
@@ -96,7 +96,7 @@ class Profile : Fragment() {
     private fun loadProfilePicture(profilePicUrl: String) {
         Glide.with(requireContext())
             .load(profilePicUrl)
-            .into(binding.imageViewProfile)
+            .into(binding.imageViewProfile) // Carrega a imagem de perfil no ImageView usando Glide
     }
 
     private fun requestCameraPermission() {
@@ -104,32 +104,32 @@ class Profile : Fragment() {
             requireActivity(),
             arrayOf(Manifest.permission.CAMERA),
             REQUEST_CODE_PERMISSIONS
-        )
+        ) // Solicita permissão para acessar a câmera do dispositivo
     }
 
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, REQUEST_CODE_CAMERA)
+        startActivityForResult(intent, REQUEST_CODE_CAMERA) // Abre a câmera para capturar uma imagem
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap?
+            val imageBitmap = data?.extras?.get("data") as Bitmap? // Obtém a imagem capturada da câmera
             imageBitmap?.let {
-                // Update the ImageView with the captured image
+                // Atualiza o ImageView com a imagem capturada
                 binding.imageViewProfile.setImageBitmap(imageBitmap)
 
                 val currentUser = FirebaseAuth.getInstance().currentUser
                 currentUser?.let {
                     val userId = it.uid
-                    val profilePicRef = storageRef.child("profile_pictures/$userId")
+                    val profilePicRef = storageRef.child("profile_pictures/$userId") // Referência ao local de armazenamento da foto de perfil
 
                     val baos = ByteArrayOutputStream()
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                     val imageData: ByteArray = baos.toByteArray()
 
-                    val uploadTask: UploadTask = profilePicRef.putBytes(imageData)
+                    val uploadTask: UploadTask = profilePicRef.putBytes(imageData) // Faz o upload da imagem para o armazenamento Firebase
                     uploadTask.continueWithTask { task ->
                         if (!task.isSuccessful) {
                             task.exception?.let {
@@ -139,7 +139,7 @@ class Profile : Fragment() {
                         profilePicRef.downloadUrl
                     }.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val downloadUri: Uri? = task.result
+                            val downloadUri: Uri? = task.result // Obtém a URL da imagem de perfil carregada
                             val profilePicUrl = downloadUri.toString()
 
                             val userRef = firestore.collection("users").document(userId)
@@ -163,7 +163,7 @@ class Profile : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        _binding = null // Limpa a referência ao binding ao destruir a visualização
     }
 
     companion object {
@@ -172,3 +172,4 @@ class Profile : Fragment() {
         private const val REQUEST_CODE_CAMERA = 100
     }
 }
+

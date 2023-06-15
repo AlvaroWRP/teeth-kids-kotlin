@@ -30,7 +30,6 @@ class Settings : Fragment() {
 
         getIsActiveFromFirestore()
 
-        // Set up sign-out button click listener
         binding.btnLogout.setOnClickListener {
             signOut()
         }

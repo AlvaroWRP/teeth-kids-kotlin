@@ -28,14 +28,6 @@
         android:theme="@style/Theme.TeethKids"
         tools:targetApi="31">
 
-        <service
-            android:name=".MyFirebaseMessagingService"
-            android:exported="false"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -45,11 +37,6 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="default_channel_id" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps"
-            android:theme="@style/Theme.TeethKids" />
         <activity
             android:name=".ThirdCreateAccountActivity"
             android:exported="false" />
@@ -63,8 +50,9 @@
             android:name=".FirstCreateAccountScreen"
             android:exported="false" />
         <activity
-            android:name=".ForgotPassword"
-            android:exported="false" />
+            android:name=".EndEmergencyActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".LogInActivity"
             android:exported="false" />
