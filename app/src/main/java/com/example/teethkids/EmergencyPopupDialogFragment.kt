@@ -19,7 +19,7 @@ class EmergencyPopupDialogFragment : DialogFragment() {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     var onDeclineClick: (() -> Unit)? = null
 
-    //Usado para inflar o layout do popup
+    // Usado para inflar o layout do popup
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
